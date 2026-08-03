@@ -7,6 +7,7 @@ const SITE = {
   city: "Pocitos, Montevideo, Uruguay",
   instagram: "https://www.instagram.com/heladerialostrovadores/",
   facebook: "https://www.facebook.com/heladeria.lostrovadores",
+  tiktok: "https://www.tiktok.com/@heladerialostrovadores",
   maps:
     "https://www.google.com/maps/search/?api=1&query=Helader%C3%ADa+Los+Trovadores+Gabriel+Pereira+3202+Montevideo",
 };
@@ -60,10 +61,10 @@ class SiteHeader extends HTMLElement {
           </a>
           ${navMarkup()}
           <div class="nav-actions">
-            <a class="button button--outline" href="tel:${SITE.phoneHref}">Llamar</a>
             <a class="button" href="https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
               "Hola, quisiera hacer una consulta.",
             )}" target="_blank" rel="noopener">Pedí por WhatsApp</a>
+            <a class="button button--outline" href="tel:${SITE.phoneHref}">Llamar</a>
           </div>
           <button
             class="menu-toggle"
@@ -78,10 +79,10 @@ class SiteHeader extends HTMLElement {
         <div class="mobile-panel" id="menu-movil" aria-hidden="true">
           ${navMarkup("mobile-links")}
           <div class="mobile-actions">
-            <a class="button button--light" href="tel:${SITE.phoneHref}">Llamar</a>
             <a class="button" href="https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
               "Hola, quisiera hacer una consulta.",
-            )}" target="_blank" rel="noopener">WhatsApp</a>
+            )}" target="_blank" rel="noopener">Pedí por WhatsApp</a>
+            <a class="button button--outline" href="tel:${SITE.phoneHref}">Llamar</a>
           </div>
         </div>
       </header>
@@ -124,7 +125,7 @@ class SiteHeader extends HTMLElement {
     });
 
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 1088) closeMenu();
+      if (window.innerWidth > 1152) closeMenu();
     });
   }
 }
@@ -173,20 +174,40 @@ class SiteFooter extends HTMLElement {
               <a class="brand" href="index.html" aria-label="Los Trovadores, inicio">
                 ${brandMarkup()}
               </a>
-              <p>
-                Heladería artesanal desde 1934, en la esquina más helada de
-                Pocitos.
-              </p>
-              <div class="button-row">
-                <a class="text-link" href="${SITE.instagram}" target="_blank" rel="noopener">
-                  Instagram
+              <h2 class="footer-heading footer-socials-heading">
+                Síguenos por nuestras redes sociales
+              </h2>
+              <div class="footer-socials" aria-label="Redes sociales">
+                <a class="social-link social-link--instagram" href="${SITE.instagram}" target="_blank" rel="noopener" aria-label="Instagram">
+                  <svg class="social-link__icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="instagram-gradient" x1="0" y1="1" x2="1" y2="0">
+                        <stop offset="0" stop-color="#ffb000"/>
+                        <stop offset=".48" stop-color="#f00073"/>
+                        <stop offset="1" stop-color="#7b2cff"/>
+                      </linearGradient>
+                    </defs>
+                    <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="url(#instagram-gradient)" stroke-width="2.4"/>
+                    <circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#instagram-gradient)" stroke-width="2.4"/>
+                    <circle cx="17.7" cy="6.4" r="1.25" fill="#8b2cf5"/>
+                  </svg>
                 </a>
-                <a class="text-link" href="${SITE.facebook}" target="_blank" rel="noopener">
-                  Facebook
+                <a class="social-link social-link--tiktok" href="${SITE.tiktok}" target="_blank" rel="noopener" aria-label="TikTok">
+                  <svg class="social-link__icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="#25f4ee" d="M14.2 3h3.05c.2 1.7 1.16 3.14 2.75 3.72v3.1a8.3 8.3 0 0 1-2.78-.65v5.64A6.2 6.2 0 1 1 11.85 8.7v3.15a3.15 3.15 0 1 0 2.35 3.05V3Z" transform="translate(-.65 .45)"/>
+                    <path fill="#fe2c55" d="M14.2 3h3.05c.2 1.7 1.16 3.14 2.75 3.72v3.1a8.3 8.3 0 0 1-2.78-.65v5.64A6.2 6.2 0 1 1 11.85 8.7v3.15a3.15 3.15 0 1 0 2.35 3.05V3Z" transform="translate(.65 -.35)"/>
+                    <path fill="#111" d="M14.2 3h3.05c.2 1.7 1.16 3.14 2.75 3.72v3.1a8.3 8.3 0 0 1-2.78-.65v5.64A6.2 6.2 0 1 1 11.85 8.7v3.15a3.15 3.15 0 1 0 2.35 3.05V3Z"/>
+                  </svg>
+                </a>
+                <a class="social-link social-link--facebook" href="${SITE.facebook}" target="_blank" rel="noopener" aria-label="Facebook">
+                  <svg class="social-link__icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10.5" fill="#1877f2"/>
+                    <path fill="#fff" d="M13.5 20v-7h2.35l.35-2.75h-2.7V8.5c0-.8.22-1.34 1.37-1.34h1.46V4.7a19.5 19.5 0 0 0-2.13-.11c-2.1 0-3.54 1.28-3.54 3.64v2.02H8.28V13h2.38v7h2.84Z"/>
+                  </svg>
                 </a>
               </div>
             </div>
-            <div>
+            <div class="footer-navigation">
               <h2 class="footer-heading">Explorá</h2>
               <nav class="footer-links" aria-label="Navegación del pie">
                 ${pages
@@ -194,13 +215,16 @@ class SiteFooter extends HTMLElement {
                   .join("")}
               </nav>
             </div>
-            <div>
+            <div class="footer-contact">
               <h2 class="footer-heading">Contacto</h2>
-              <address class="footer-links">
+              <address class="footer-links footer-links--contact">
                 <a href="tel:${SITE.phoneHref}">${SITE.phoneDisplay}</a>
                 <a href="mailto:${SITE.email}">${SITE.email}</a>
                 <a href="${SITE.maps}" target="_blank" rel="noopener">
-                  ${SITE.address}<br>${SITE.city}
+                  ${SITE.address}
+                </a>
+                <a href="${SITE.maps}" target="_blank" rel="noopener">
+                  ${SITE.city}
                 </a>
               </address>
             </div>
@@ -215,7 +239,7 @@ class SiteFooter extends HTMLElement {
           </div>
           <div class="footer-bottom">
             <p>© ${year} Los Trovadores. Todos los derechos reservados.</p>
-            <p>Hecho con tradición en Montevideo.</p>
+            <p>Helado artesanal hecho desde 1934 en Montevideo, Uruguay</p>
           </div>
         </div>
       </footer>

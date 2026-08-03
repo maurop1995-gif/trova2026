@@ -128,6 +128,15 @@ const setupFlavors = () => {
       `;
   };
 
+  const scrollToResults = () => {
+    requestAnimationFrame(() => {
+      title.scrollIntoView({
+        behavior: reducedMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+  };
+
   controls.addEventListener("click", (event) => {
     const button = event.target.closest("[data-category]");
     if (!button) return;
@@ -139,6 +148,7 @@ const setupFlavors = () => {
     });
 
     render(button.dataset.category);
+    scrollToResults();
   });
 
   controls.addEventListener("keydown", (event) => {
@@ -161,10 +171,184 @@ const setCurrentYearStory = () => {
   });
 };
 
+const cloneReviewCard = (card) => {
+  const clone = card.cloneNode(true);
+  clone.dataset.reviewClone = "true";
+  clone.setAttribute("aria-hidden", "true");
+  clone.querySelectorAll("img").forEach((image) => {
+    image.alt = "";
+    image.loading = "lazy";
+  });
+  return clone;
+};
+
+const setupReviewMarquees = () => {
+  document.querySelectorAll(".review-track").forEach((track) => {
+    track.classList.remove("is-looping");
+    track.style.removeProperty("--review-loop-distance");
+    track.querySelectorAll("[data-review-clone]").forEach((clone) => clone.remove());
+
+    const cards = [...track.children];
+    if (cards.length < 2) {
+      track.dataset.loopReady = "false";
+      return;
+    }
+
+    const appendReviewSet = () => {
+      const clones = document.createDocumentFragment();
+      cards.forEach((card) => clones.append(cloneReviewCard(card)));
+      track.append(clones);
+    };
+
+    appendReviewSet();
+
+    const firstCard = cards[0];
+    const firstClone = track.querySelector("[data-review-clone]");
+    const loopDistance = firstClone.offsetLeft - firstCard.offsetLeft;
+    if (loopDistance <= 0) return;
+
+    const marquee = track.closest(".review-marquee");
+    const viewportWidth = marquee?.clientWidth || window.innerWidth;
+    const totalSets = Math.max(2, Math.ceil(viewportWidth / loopDistance) + 2);
+
+    for (let setIndex = 2; setIndex < totalSets; setIndex += 1) {
+      appendReviewSet();
+    }
+
+    track.style.setProperty("--review-loop-distance", `${-loopDistance}px`);
+    track.dataset.loopReady = "true";
+    void track.offsetWidth;
+    track.classList.add("is-looping");
+  });
+};
+
+let reviewResizeTimer;
+window.addEventListener(
+  "resize",
+  () => {
+    window.clearTimeout(reviewResizeTimer);
+    reviewResizeTimer = window.setTimeout(setupReviewMarquees, 180);
+  },
+  { passive: true },
+);
+
+const createGoogleReviewCard = (review) => {
+  const article = document.createElement("article");
+  article.className = "review-card";
+
+  const rating = Math.max(1, Math.min(5, Math.round(Number(review.rating) || 5)));
+  const stars = document.createElement("div");
+  stars.className = "hero__stars";
+  stars.setAttribute("aria-label", `${rating} de 5 estrellas`);
+  stars.textContent = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+  const quote = document.createElement("blockquote");
+  quote.textContent = review.text?.trim()
+    ? `“${review.text.trim()}”`
+    : `Calificación de ${rating} estrellas en Google.`;
+
+  const author = document.createElement("div");
+  author.className = "review-author";
+
+  if (review.profile_photo_url) {
+    const image = document.createElement("img");
+    image.src = review.profile_photo_url;
+    image.alt = "";
+    image.width = 128;
+    image.height = 128;
+    image.loading = "lazy";
+    image.referrerPolicy = "no-referrer";
+    author.append(image);
+  } else {
+    const fallback = document.createElement("span");
+    fallback.className = "review-author__fallback";
+    fallback.setAttribute("aria-hidden", "true");
+    fallback.textContent = (review.author_name || "G").trim().charAt(0).toUpperCase();
+    author.append(fallback);
+  }
+
+  const authorCopy = document.createElement("div");
+  const cite = document.createElement("cite");
+  cite.textContent = review.author_name || "Usuario de Google";
+  const small = document.createElement("small");
+  small.textContent = review.relative_time_description
+    ? `Google · ${review.relative_time_description}`
+    : "Reseña publicada en Google";
+  authorCopy.append(cite, small);
+  author.append(authorCopy);
+
+  article.append(stars, quote, author);
+  return article;
+};
+
+const setupGoogleReviews = async () => {
+  const track = document.querySelector("[data-google-reviews]");
+  if (!track || window.location.protocol === "file:") return;
+
+  try {
+    const response = await fetch("api/google-reviews.php", {
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    });
+    if (!response.ok) throw new Error("Google reviews unavailable");
+
+    const data = await response.json();
+
+    const rating = Number(data.rating);
+    const ratingElement = document.querySelector("[data-google-rating]");
+    if (ratingElement && Number.isFinite(rating)) {
+      ratingElement.textContent = `${rating.toLocaleString("es-UY", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      })} / 5`;
+    }
+    const ratingValueElements = document.querySelectorAll(
+      "[data-google-rating-value]",
+    );
+    if (ratingValueElements.length && Number.isFinite(rating)) {
+      const formattedRating = rating.toLocaleString("es-UY", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      });
+      ratingValueElements.forEach((element) => {
+        element.textContent = formattedRating;
+      });
+    }
+
+    const count = Number(data.user_ratings_total);
+    const countElements = document.querySelectorAll("[data-google-review-count]");
+    if (countElements.length && Number.isFinite(count)) {
+      const formattedCount = `${new Intl.NumberFormat("es-UY").format(count)} reseñas`;
+      countElements.forEach((element) => {
+        element.textContent = formattedCount;
+      });
+    }
+
+    if (!Array.isArray(data.reviews) || data.reviews.length < 2) return;
+
+    const fragment = document.createDocumentFragment();
+    data.reviews.forEach((review) => fragment.append(createGoogleReviewCard(review)));
+    track.replaceChildren(fragment);
+    track.dataset.loopReady = "false";
+
+    const status = document.querySelector("[data-google-status]");
+    if (status) status.textContent = "Últimas reseñas de Google, ordenadas por fecha.";
+
+    setupReviewMarquees();
+  } catch {
+    const status = document.querySelector("[data-google-status]");
+    if (status) {
+      status.textContent = "Reseñas destacadas de Google.";
+    }
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   revealElements();
   setupWhatsAppForms();
   setupMap();
   setupFlavors();
   setCurrentYearStory();
+  setupReviewMarquees();
+  setupGoogleReviews();
 });

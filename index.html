@@ -41,7 +41,8 @@
         },
         "sameAs": [
           "https://www.instagram.com/heladerialostrovadores/",
-          "https://www.facebook.com/heladeria.lostrovadores"
+          "https://www.facebook.com/heladeria.lostrovadores",
+          "https://www.tiktok.com/@heladerialostrovadores"
         ],
         "openingHoursSpecification": [
           {
@@ -84,26 +85,37 @@
               Heladería<br>Los Trovadores
             </h1>
             <p class="hero__lead">
-              Todos los días, el auténtico sabor del helado artesanal.
+              Todos los días, el auténtico sabor del helado artesanal
             </p>
             <div class="button-row">
-              <a class="button" href="productos.html">Explorar productos</a>
-              <a class="button button--light" href="eventos.html">Eventos</a>
+              <a class="button button--light" href="productos.html">PRODUCTOS</a>
+              <a class="button button--light" href="eventos.html">EVENTOS</a>
             </div>
-            <a
-              class="hero__meta"
-              href="https://share.google/g5HVUBpzcsd5Ws56V"
-              target="_blank"
-              rel="noopener"
-              aria-label="Ver reseñas de Los Trovadores en Google"
-            >
-              <strong class="hero__score">4,8/5</strong>
-              <span>
-                <span class="hero__stars" aria-hidden="true">★★★★★</span><br>
-                Más de 7.500 reseñas en Google
-              </span>
-            </a>
           </div>
+          <a
+            class="hero__meta"
+            href="https://share.google/g5HVUBpzcsd5Ws56V"
+            target="_blank"
+            rel="noopener"
+            aria-label="Ver las reseñas de Los Trovadores en Google"
+          >
+            <span class="hero__google-top">
+              <img
+                src="assets/google-g.svg"
+                alt=""
+                width="30"
+                height="30"
+              >
+              <span class="hero__stars" aria-hidden="true">★★★★★</span>
+            </span>
+            <span class="hero__rating">
+              <strong class="hero__score" data-google-rating-value>4,8</strong>
+              <span>/ 5</span>
+            </span>
+            <span class="hero__review-label">
+              <span data-google-review-count>7.607 reseñas</span> de Google
+            </span>
+          </a>
         </div>
         <a class="scroll-cue" href="#historia" aria-label="Continuar hacia nuestra historia">↓</a>
       </section>
@@ -131,8 +143,8 @@
               </p>
               <div class="button-row">
                 <a class="button" href="sobre-nosotros.html">Sobre nosotros</a>
-                <a class="button button--outline" href="nuestras-redes.html">Nuestras redes</a>
-                <a class="button button--outline" href="contacto.html">Contacto</a>
+                <a class="button" href="nuestras-redes.html">Nuestras redes</a>
+                <a class="button" href="contacto.html">Contacto</a>
               </div>
             </div>
           </div>
@@ -254,7 +266,10 @@
         </div>
       </section>
 
-      <section class="section section--lime" aria-labelledby="resenas-titulo">
+      <section
+        class="section section--lime reviews-section"
+        aria-labelledby="resenas-titulo"
+      >
         <div class="container">
           <div class="reviews-head reveal">
             <div>
@@ -263,58 +278,177 @@
                 Lo que dicen nuestros clientes
               </h2>
             </div>
+          </div>
+          <div class="reviews-summary-row reveal">
             <a
               class="review-summary"
               href="https://share.google/g5HVUBpzcsd5Ws56V"
               target="_blank"
               rel="noopener"
+              aria-label="Ver todas las reseñas de Los Trovadores en Google"
             >
-              <span aria-hidden="true">★★★★★</span>
-              <strong>4,8 / 5 en Google ↗</strong>
+              <span class="review-summary__logo" aria-hidden="true">
+                <img
+                  src="assets/google-g.svg"
+                  alt=""
+                  width="32"
+                  height="32"
+                >
+              </span>
+              <span class="review-summary__copy">
+                <span class="review-summary__stars" aria-hidden="true">
+                  <i>★</i><i>★</i><i>★</i><i>★</i><i>★</i>
+                </span>
+                <strong data-google-rating>4,8 / 5</strong>
+                <small>
+                  Ver las
+                  <span data-google-review-count>7.607 reseñas</span>
+                  en Google
+                </small>
+              </span>
             </a>
           </div>
-          <div class="review-track" aria-label="Reseñas destacadas">
-            <article class="review-card">
-              <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
-              <blockquote>
-                “La mejor heladería que probé en mi vida. El dulce de leche es
-                cremoso, intenso y artesanal de verdad.”
-              </blockquote>
-              <cite>Valentina R.</cite>
-              <small>Reseña publicada en Google</small>
-            </article>
-            <article class="review-card">
-              <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
-              <blockquote>
-                “Un clásico de Pocitos desde 1934. La atención es cálida y el
-                pistacho, espectacular.”
-              </blockquote>
-              <cite>Martín G.</cite>
-              <small>Reseña publicada en Google</small>
-            </article>
-            <article class="review-card">
-              <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
-              <blockquote>
-                “Hay una gran variedad de sabores sin azúcar y todos son
-                riquísimos. Una propuesta difícil de encontrar.”
-              </blockquote>
-              <cite>Lucía F.</cite>
-              <small>Reseña publicada en Google</small>
-            </article>
-            <article class="review-card">
-              <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
-              <blockquote>
-                “Contratamos el servicio para un cumpleaños y fue el éxito de
-                la fiesta. Puntuales y con el helado impecable.”
-              </blockquote>
-              <cite>Diego P.</cite>
-              <small>Reseña publicada en Google</small>
-            </article>
+          <p
+            class="reviews-note"
+            data-google-status
+            role="status"
+            aria-live="polite"
+          >
+            Últimas reseñas de Google, ordenadas por fecha.
+          </p>
+          <div
+            class="review-marquee"
+            role="region"
+            tabindex="0"
+            aria-label="Reseñas destacadas en movimiento continuo; enfocá esta sección para pausar"
+          >
+            <div class="review-track" data-google-reviews>
+              <article class="review-card">
+                <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+                <blockquote>
+                  “La mejor heladería que probé en mi vida. El dulce de leche es
+                  cremoso, intenso y artesanal de verdad.”
+                </blockquote>
+                <div class="review-author">
+                  <img
+                    src="assets/resenas/valentina-r.jpg"
+                    alt=""
+                    width="128"
+                    height="128"
+                    loading="lazy"
+                  >
+                  <div>
+                    <cite>Valentina R.</cite>
+                    <small>Reseña publicada en Google</small>
+                  </div>
+                </div>
+              </article>
+              <article class="review-card">
+                <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+                <blockquote>
+                  “Un clásico de Pocitos desde 1934. La atención es cálida y el
+                  pistacho, espectacular.”
+                </blockquote>
+                <div class="review-author">
+                  <img
+                    src="assets/resenas/martin-g.jpg"
+                    alt=""
+                    width="128"
+                    height="128"
+                    loading="lazy"
+                  >
+                  <div>
+                    <cite>Martín G.</cite>
+                    <small>Reseña publicada en Google</small>
+                  </div>
+                </div>
+              </article>
+              <article class="review-card">
+                <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+                <blockquote>
+                  “Hay una gran variedad de sabores sin azúcar y todos son
+                  riquísimos. Una propuesta difícil de encontrar.”
+                </blockquote>
+                <div class="review-author">
+                  <img
+                    src="assets/resenas/lucia-f.jpg"
+                    alt=""
+                    width="128"
+                    height="128"
+                    loading="lazy"
+                  >
+                  <div>
+                    <cite>Lucía F.</cite>
+                    <small>Reseña publicada en Google</small>
+                  </div>
+                </div>
+              </article>
+              <article class="review-card">
+                <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+                <blockquote>
+                  “Contratamos el servicio para un cumpleaños y fue el éxito de
+                  la fiesta. Puntuales y con el helado impecable.”
+                </blockquote>
+                <div class="review-author">
+                  <img
+                    src="assets/resenas/diego-p.jpg"
+                    alt=""
+                    width="128"
+                    height="128"
+                    loading="lazy"
+                  >
+                  <div>
+                    <cite>Diego P.</cite>
+                    <small>Reseña publicada en Google</small>
+                  </div>
+                </div>
+              </article>
+              <article class="review-card">
+                <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+                <blockquote>
+                  “Fuimos en familia y cada uno encontró su sabor. La frutilla y
+                  el chocolate fueron nuestros favoritos.”
+                </blockquote>
+                <div class="review-author">
+                  <img
+                    src="assets/resenas/sofia-m.jpg"
+                    alt=""
+                    width="128"
+                    height="128"
+                    loading="lazy"
+                  >
+                  <div>
+                    <cite>Sofía M.</cite>
+                    <small>Reseña publicada en Google</small>
+                  </div>
+                </div>
+              </article>
+              <article class="review-card">
+                <div class="hero__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+                <blockquote>
+                  “Excelente atención y muy buena calidad. Se nota la tradición
+                  en cada gusto; siempre volvemos.”
+                </blockquote>
+                <div class="review-author">
+                  <img
+                    src="assets/resenas/rodrigo-s.jpg"
+                    alt=""
+                    width="128"
+                    height="128"
+                    loading="lazy"
+                  >
+                  <div>
+                    <cite>Rodrigo S.</cite>
+                    <small>Reseña publicada en Google</small>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section" aria-labelledby="visita-titulo">
+      <section class="section visit-hours-section" aria-labelledby="visita-titulo">
         <div class="container visit-section reveal">
           <div class="visit-section__header">
             <span class="eyebrow">Vení a visitarnos</span>
@@ -335,17 +469,16 @@
                 </div>
               </dl>
               <address>
-                Gabriel Pereira 3202, esq. Pedro Berro<br>
-                Pocitos, Montevideo
-              </address>
-              <div class="button-row">
                 <a
-                  class="button"
+                  class="visit-address"
                   href="https://www.google.com/maps/search/?api=1&query=Helader%C3%ADa+Los+Trovadores+Gabriel+Pereira+3202+Montevideo"
                   target="_blank"
                   rel="noopener"
-                >Cómo llegar</a>
-              </div>
+                >
+                  <span class="visit-address__pin" aria-hidden="true"></span>
+                  <span>Gabriel Pereira 3202, esq. Pedro Berro</span>
+                </a>
+              </address>
             </div>
             <div class="map-embed">
               <iframe
