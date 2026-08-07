@@ -26,7 +26,7 @@ const currentPage = () => document.body.dataset.page || "inicio";
 const brandMarkup = () => `
   <img
     class="brand__logo"
-    src="https://framerusercontent.com/images/RIAgDKH40Lt0IJQel8Hu4rzNQbg.png?width=231&height=128"
+    src="assets/logo.webp"
     alt=""
     width="231"
     height="128"
@@ -61,9 +61,9 @@ class SiteHeader extends HTMLElement {
           </a>
           ${navMarkup()}
           <div class="nav-actions">
-            <a class="button" href="https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
+            <a class="button button--whatsapp" href="https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
               "Hola, quisiera hacer una consulta.",
-            )}" target="_blank" rel="noopener">Pedí por WhatsApp</a>
+            )}" target="_blank" rel="noopener"><span class="nav-actions__long">Pedí por </span>WhatsApp</a>
             <a class="button button--outline" href="tel:${SITE.phoneHref}">Llamar</a>
           </div>
           <button
@@ -150,11 +150,12 @@ class BusinessCta extends HTMLElement {
           </div>
           <figure class="business-cta__image">
             <img
-              src="assets/bici.jpeg"
+              src="assets/bici.webp"
               alt="Bicicleta con carro de helados artesanales"
-              width="1600"
-              height="1067"
+              width="1200"
+              height="800"
               loading="lazy"
+              decoding="async"
             >
           </figure>
         </div>
@@ -264,12 +265,42 @@ class TrovitoChat extends HTMLElement {
     this.dataset.ready = "true";
     this.dataset.open = "false";
     this.setAttribute("aria-label", "Don Trovito te responde");
+
+    /*
+      El chatbot pesa ~124 KB. En vez de cargarlo junto con la página,
+      esperamos a que el navegador esté libre (o a la primera señal de
+      interacción, lo que ocurra antes). El widget aparece igual, pero
+      deja de competir con el contenido por el ancho de banda.
+    */
+    const cargar = () => {
+      if (this.dataset.loaded === "true") return;
+      this.dataset.loaded = "true";
+      señales.forEach((evento) =>
+        window.removeEventListener(evento, cargar, opciones),
+      );
+      this.montarFrame();
+    };
+
+    const señales = ["pointerdown", "keydown", "scroll", "touchstart"];
+    const opciones = { once: true, passive: true, capture: true };
+    señales.forEach((evento) =>
+      window.addEventListener(evento, cargar, opciones),
+    );
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(cargar, { timeout: 3500 });
+    } else {
+      window.setTimeout(cargar, 2500);
+    }
+  }
+
+  montarFrame() {
     this.innerHTML = `
       <iframe
         class="trovito-chat__frame"
         src="trovito-chatbot.html?embed=1"
         title="Don Trovito te responde"
-        loading="eager"
+        loading="lazy"
       ></iframe>
     `;
 

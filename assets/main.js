@@ -147,7 +147,6 @@ const setupFlavors = () => {
   const grid = document.querySelector("[data-flavor-grid]");
   const controls = document.querySelector("[data-flavor-controls]");
   const title = document.querySelector("[data-flavor-title]");
-  const sugarFreeImage = document.querySelector("[data-sugar-free-image]");
   if (!grid || !controls || !title || !window.FLAVORS) return;
 
   const categories = new Map(
@@ -167,9 +166,6 @@ const setupFlavors = () => {
 
     title.textContent = categories.get(category) || "Sabores y productos";
     if (activeButton?.id) grid.setAttribute("aria-labelledby", activeButton.id);
-    if (sugarFreeImage) {
-      sugarFreeImage.hidden = category !== "sin-azucar";
-    }
 
     grid.innerHTML = matches.length
       ? matches
@@ -216,16 +212,19 @@ const setupFlavors = () => {
     });
   };
 
-  controls.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-category]");
-    if (!button) return;
-
+  const marcarActivo = (button) => {
     controls.querySelectorAll("[data-category]").forEach((control) => {
       const active = control === button;
       control.setAttribute("aria-selected", String(active));
       control.tabIndex = active ? 0 : -1;
     });
+  };
 
+  controls.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-category]");
+    if (!button) return;
+
+    marcarActivo(button);
     render(button.dataset.category);
     scrollToResults();
   });
@@ -241,7 +240,36 @@ const setupFlavors = () => {
     next.focus();
   });
 
-  render("clasicos");
+  /*
+    Las tarjetas de la portada linkean a productos.html#sin-azucar,
+    #postres-con-azucar, etc. Si el hash coincide con una categoría
+    real, se abre ya filtrada en vez de caer siempre en «clásicos».
+  */
+  const categoriaInicial = () => {
+    const hash = decodeURIComponent(window.location.hash.replace("#", ""));
+    return categories.has(hash) ? hash : "clasicos";
+  };
+
+  const abrirCategoria = (key, { desplazar = false } = {}) => {
+    marcarActivo(controls.querySelector(`[data-category="${key}"]`));
+    render(key);
+    if (desplazar) scrollToResults();
+  };
+
+  window.addEventListener("hashchange", () => {
+    const key = categoriaInicial();
+    abrirCategoria(key, { desplazar: true });
+  });
+
+  abrirCategoria(categoriaInicial());
+};
+
+/* Un solo lugar define el número de WhatsApp: el objeto SITE. */
+const setupWhatsAppLinks = () => {
+  document.querySelectorAll("[data-whatsapp]").forEach((link) => {
+    const texto = link.dataset.whatsappText || "Hola, quisiera hacer una consulta.";
+    link.href = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(texto)}`;
+  });
 };
 
 const setCurrentYearStory = () => {
@@ -311,11 +339,18 @@ window.addEventListener(
   { passive: true },
 );
 
-// Único dato que se sincroniza con Google: la cantidad total de reseñas.
-// Las tarjetas del carrusel son fijas y se editan a mano en index.html.
+// Datos que se sincronizan con el perfil real de Google: el puntaje y el
+// total de reseñas. Los testimonios del carrusel son fijos y se editan a
+// mano en index.html, por eso no se presentan como reseñas de Google.
 const setupGoogleReviewCount = async () => {
   const countElements = document.querySelectorAll("[data-google-review-count]");
-  if (!countElements.length || window.location.protocol === "file:") return;
+  const ratingElements = document.querySelectorAll("[data-google-rating]");
+  const ratingValueElements = document.querySelectorAll(
+    "[data-google-rating-value]",
+  );
+  const hayDonde =
+    countElements.length || ratingElements.length || ratingValueElements.length;
+  if (!hayDonde || window.location.protocol === "file:") return;
 
   try {
     const response = await fetch("api/google-reviews.php", {
@@ -325,20 +360,36 @@ const setupGoogleReviewCount = async () => {
     if (!response.ok) throw new Error("Google reviews unavailable");
 
     const data = await response.json();
-    const count = Number(data.user_ratings_total);
-    if (!Number.isFinite(count) || count <= 0) return;
 
-    const formattedCount = `${new Intl.NumberFormat("es-UY").format(count)} reseñas`;
-    countElements.forEach((element) => {
-      element.textContent = formattedCount;
-    });
+    const count = Number(data.user_ratings_total);
+    if (Number.isFinite(count) && count > 0) {
+      const formattedCount = `${new Intl.NumberFormat("es-UY").format(count)} reseñas`;
+      countElements.forEach((element) => {
+        element.textContent = formattedCount;
+      });
+    }
+
+    const rating = Number(data.rating);
+    if (Number.isFinite(rating) && rating > 0) {
+      const formattedRating = new Intl.NumberFormat("es-UY", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }).format(rating);
+      ratingValueElements.forEach((element) => {
+        element.textContent = formattedRating;
+      });
+      ratingElements.forEach((element) => {
+        element.textContent = `${formattedRating} / 5`;
+      });
+    }
   } catch {
-    // Si Google no responde, queda el número que está escrito en el HTML.
+    // Si Google no responde, quedan los valores escritos en el HTML.
   }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
   revealElements();
+  setupWhatsAppLinks();
   setupWhatsAppForms();
   setupEmailForms();
   setupMap();

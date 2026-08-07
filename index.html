@@ -20,6 +20,12 @@
     <meta property="og:image:alt" content="Los Trovadores, heladería artesanal desde 1934">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://lostrovadores.com.uy/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap"
+    >
     <link rel="stylesheet" href="assets/styles.css">
     <title>Heladería Los Trovadores | Helado artesanal en Pocitos</title>
     <script type="application/ld+json">
@@ -75,7 +81,7 @@
     <main id="contenido">
       <section
         class="hero"
-        style="--hero-image: url('https://framerusercontent.com/images/xLcZlOg9eMD724HGC62vazBzBk.jpg?height=1080&width=1920')"
+        style="--hero-image: url('assets/hero-portada.webp')"
         aria-labelledby="titulo-principal"
       >
         <div class="container hero__content">
@@ -88,8 +94,15 @@
               Todos los días, en la esquina más helada de Pocitos
             </p>
             <div class="button-row">
-              <a class="button button--light" href="productos.html">PRODUCTOS</a>
-              <a class="button button--light" href="eventos.html">EVENTOS</a>
+              <a class="button button--light" href="productos.html">Ver sabores</a>
+              <a
+                class="button button--outline"
+                data-whatsapp
+                data-whatsapp-text="Hola, quisiera hacer una consulta."
+                href="https://wa.me/59898388553"
+                target="_blank"
+                rel="noopener"
+              >Consultar por WhatsApp</a>
             </div>
           </div>
           <a
@@ -150,38 +163,39 @@
           <div class="history-gallery reveal">
             <figure class="history-gallery__main">
               <img
-                src="https://framerusercontent.com/images/WuEVEBK05A682aDUcIZg41OErCg.jpg?scale-down-to=1024&width=1206&height=1207"
+                src="assets/historia-local.webp"
                 alt="Local histórico de Los Trovadores en Pocitos"
-                width="1206"
-                height="1207"
+                width="1200"
+                height="1201"
                 loading="lazy"
               >
             </figure>
             <figure>
               <img
-                src="https://framerusercontent.com/images/QqnQxNs3JbTOHIs84QcMrcyNIo.png?scale-down-to=1024&width=1700&height=1150"
+                src="assets/historia-helados.webp"
                 alt="Helados artesanales de Los Trovadores"
-                width="1700"
-                height="1150"
+                width="1400"
+                height="947"
                 loading="lazy"
               >
             </figure>
             <figure>
               <img
-                src="https://framerusercontent.com/images/IWJgQJa4BXL2USO2zlEw7VdBsc.jpg?scale-down-to=1024&width=7360&height=4912"
+                src="assets/historia-taller.webp"
                 alt="Preparación artesanal de helados"
-                width="7360"
-                height="4912"
+                width="1400"
+                height="934"
                 loading="lazy"
               >
             </figure>
             <figure class="history-gallery__wide">
               <img
-                src="assets/history-menu-clean.png"
+                src="assets/history-menu.webp"
                 alt="Detalle de la identidad visual de Los Trovadores"
                 width="2048"
                 height="585"
                 loading="lazy"
+                decoding="async"
               >
             </figure>
           </div>
@@ -201,63 +215,51 @@
             </p>
           </div>
           <div class="cards">
-            <a class="product-card reveal" href="productos.html#sabores">
+            <a class="product-card reveal" href="productos.html#clasicos">
               <img
-                src="https://framerusercontent.com/images/tLF7HAoH3oB400MAR6UXvbUzAg.jpg?scale-down-to=512&width=925&height=631"
+                src="assets/card-clasicos.webp"
                 alt="Pote de helado con chocolate, dulce de leche y crema"
-                width="925"
-                height="631"
+                width="900"
+                height="614"
                 loading="lazy"
+                decoding="async"
               >
               <div class="product-card__body">
-                <span class="tag">Explorá las opciones</span>
+                <span class="tag">Los de siempre</span>
                 <h3>Sabores clásicos</h3>
                 <p>Dulce de leche, chocolate, crema del cielo y mucho más.</p>
                 <span class="product-card__arrow" aria-hidden="true">→</span>
               </div>
             </a>
-            <a class="product-card reveal" href="productos.html#sabores">
+            <a class="product-card reveal" href="productos.html#sin-azucar">
               <img
-                src="https://framerusercontent.com/images/mAQeorCaGy64Ud2JTo4qqMfhxYg.jpg?scale-down-to=512&width=870&height=593"
+                src="assets/card-sin-azucar.webp"
                 alt="Pote de helado sin azúcar con crema y frutilla"
                 width="870"
                 height="593"
                 loading="lazy"
+                decoding="async"
               >
               <div class="product-card__body">
-                <span class="tag">Explorá las opciones</span>
+                <span class="tag">Línea especial</span>
                 <h3>Sin azúcar agregada</h3>
-                <p>La cremosidad de siempre en una línea especial.</p>
+                <p>La cremosidad de siempre, también sin gluten y sin lactosa.</p>
                 <span class="product-card__arrow" aria-hidden="true">→</span>
               </div>
             </a>
-            <a class="product-card reveal" href="productos.html#sabores">
+            <a class="product-card reveal" href="productos.html#postres-con-azucar">
               <img
-                src="https://framerusercontent.com/images/YqGpZfw3667mxuyRanqvlgAY8I.jpg?scale-down-to=512&width=910&height=620"
+                src="assets/card-postres.webp"
                 alt="Pote de helado con pistacho y frutilla"
-                width="910"
-                height="620"
+                width="900"
+                height="613"
                 loading="lazy"
+                decoding="async"
               >
               <div class="product-card__body">
-                <span class="tag">Explorá las opciones</span>
+                <span class="tag">Para compartir</span>
                 <h3>Postres artesanales</h3>
-                <p>Opciones para celebrar y disfrutar en cualquier ocasión.</p>
-                <span class="product-card__arrow" aria-hidden="true">→</span>
-              </div>
-            </a>
-            <a class="product-card reveal" href="productos.html#sabores">
-              <img
-                src="https://framerusercontent.com/images/YqGpZfw3667mxuyRanqvlgAY8I.jpg?scale-down-to=512&width=910&height=620"
-                alt="Postre helado artesanal sin azúcar agregada"
-                width="910"
-                height="620"
-                loading="lazy"
-              >
-              <div class="product-card__body">
-                <span class="tag">Explorá las opciones</span>
-                <h3>Postres sin azúcar</h3>
-                <p>Opciones sin azúcar agregada, con el sabor artesanal de siempre.</p>
+                <p>Tortas, cassattas y bombones para celebrar cualquier ocasión.</p>
                 <span class="product-card__arrow" aria-hidden="true">→</span>
               </div>
             </a>
@@ -272,7 +274,7 @@
         <div class="container">
           <div class="reviews-head reveal">
             <div>
-              <span class="eyebrow">Reseñas de Google</span>
+              <span class="eyebrow">La voz de quienes nos visitan</span>
               <h2 class="section-title" id="resenas-titulo">
                 Lo que dicen nuestros clientes
               </h2>
@@ -313,7 +315,7 @@
             role="status"
             aria-live="polite"
           >
-            Últimas reseñas de Google, ordenadas por fecha.
+            El puntaje y el total de reseñas se sincronizan con Google.
           </p>
           <div
             class="review-marquee"
@@ -338,7 +340,6 @@
                   >
                   <div>
                     <cite>Valentina R.</cite>
-                    <small>Reseña publicada en Google</small>
                   </div>
                 </div>
               </article>
@@ -358,7 +359,6 @@
                   >
                   <div>
                     <cite>Martín G.</cite>
-                    <small>Reseña publicada en Google</small>
                   </div>
                 </div>
               </article>
@@ -378,7 +378,6 @@
                   >
                   <div>
                     <cite>Lucía F.</cite>
-                    <small>Reseña publicada en Google</small>
                   </div>
                 </div>
               </article>
@@ -398,7 +397,6 @@
                   >
                   <div>
                     <cite>Diego P.</cite>
-                    <small>Reseña publicada en Google</small>
                   </div>
                 </div>
               </article>
@@ -418,7 +416,6 @@
                   >
                   <div>
                     <cite>Sofía M.</cite>
-                    <small>Reseña publicada en Google</small>
                   </div>
                 </div>
               </article>
@@ -438,7 +435,6 @@
                   >
                   <div>
                     <cite>Rodrigo S.</cite>
-                    <small>Reseña publicada en Google</small>
                   </div>
                 </div>
               </article>
@@ -470,7 +466,7 @@
               <address>
                 <a
                   class="visit-address"
-                  href="https://www.google.com/maps/search/?api=1&query=Helader%C3%ADa+Los+Trovadores+Gabriel+Pereira+3202+Montevideo"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=Helader%C3%ADa+Los+Trovadores+Gabriel+Pereira+3202+Montevideo"
                   target="_blank"
                   rel="noopener"
                 >
@@ -484,7 +480,7 @@
             </div>
             <div class="map-embed">
               <iframe
-                src="https://maps.google.com/maps?q=Gabriel%20Pereira%203202%20Montevideo&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Gabriel%20Pereira%203202%20Montevideo&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
                 title="Mapa de Heladería Los Trovadores"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"

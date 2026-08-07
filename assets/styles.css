@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700;800;900&display=swap");
-
 @layer reset, tokens, base, components, sections, utilities, responsive, framer-match;
 
 @layer reset {
@@ -365,10 +363,6 @@ trovito-chat[data-open="true"] {
   }
 
   .brand__mark,
-  .brand__copy {
-    display: none;
-  }
-
   .nav-links {
     justify-self: center;
     gap: clamp(1rem, 1.5vw, 1.85rem);
@@ -437,16 +431,38 @@ trovito-chat[data-open="true"] {
       height: 5.5rem;
     }
 
-    .nav-links,
-    .nav-actions {
+    .nav-links {
       display: none;
+    }
+
+    /*
+      El WhatsApp es la vía principal de consulta del negocio: se queda
+      visible en móvil en vez de esconderse detrás del menú. Sólo se
+      compacta la etiqueta y se oculta el resto de las acciones.
+    */
+    .nav-actions {
+      margin-left: 0;
+    }
+
+    .nav-actions .button:not(.button--whatsapp) {
+      display: none;
+    }
+
+    .nav-actions__long {
+      display: none;
+    }
+
+    .nav-actions .button--whatsapp {
+      min-height: 4.5rem;
+      padding-inline: 1.85rem;
+      font-size: 1rem;
+      white-space: nowrap;
     }
 
     .menu-toggle {
       display: grid;
       width: 5.5rem;
       height: 5.5rem;
-      margin-left: auto;
       background: var(--cream-300);
       border-radius: 50%;
     }
@@ -576,6 +592,12 @@ trovito-chat[data-open="true"] {
     .menu-toggle::before,
     .menu-toggle::after {
       width: 1.65rem;
+    }
+
+    .nav-actions .button--whatsapp {
+      min-height: 3.25rem;
+      padding-inline: 1.1rem;
+      font-size: 0.8rem;
     }
 
     .mobile-panel {
@@ -799,11 +821,6 @@ trovito-chat[data-open="true"] {
     text-transform: uppercase;
   }
 
-  .scroll-cue {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
   #historia {
     min-height: 63.4375rem;
     padding-block: 5rem;
@@ -903,7 +920,7 @@ trovito-chat[data-open="true"] {
   }
 
   .cards {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.8rem;
     margin-top: 0;
   }
@@ -1224,21 +1241,6 @@ trovito-chat[data-open="true"] {
     border-radius: 50%;
     box-shadow: 0 0 0 1px rgb(30 41 40 / 12%);
     object-fit: cover;
-  }
-
-  .review-author__fallback {
-    display: grid;
-    width: 4.25rem;
-    height: 4.25rem;
-    flex: 0 0 auto;
-    place-items: center;
-    color: var(--white);
-    background: var(--forest-900);
-    border: 0.25rem solid rgb(255 255 255 / 72%);
-    border-radius: 50%;
-    font-size: 1.4rem;
-    font-weight: 700;
-    box-shadow: 0 0 0 1px rgb(30 41 40 / 12%);
   }
 
   .review-author small {
@@ -1637,15 +1639,6 @@ trovito-chat[data-open="true"] {
     transform: translateX(-50%);
   }
 
-  .whatsapp-fab {
-    width: 3.2rem;
-    height: 3.2rem;
-    color: #fff;
-    background: var(--forest-900);
-    border-color: var(--cream-100);
-    font-family: var(--display);
-  }
-
   @media (max-width: 68rem) {
     .cards {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1858,6 +1851,7 @@ trovito-chat[data-open="true"] {
     .footer-map iframe {
       min-height: 15rem;
     }
+
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1986,10 +1980,6 @@ trovito-chat[data-open="true"] {
 
   .section {
     padding-block: clamp(4.5rem, 8vw, 8rem);
-  }
-
-  .section--tight {
-    padding-block: clamp(3.5rem, 6vw, 5.5rem);
   }
 
   .section--cream {
@@ -2123,21 +2113,6 @@ trovito-chat[data-open="true"] {
     background: var(--white);
   }
 
-  .text-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    font-weight: 800;
-    text-decoration: underline;
-    text-decoration-color: var(--lime-300);
-    text-decoration-thickness: 0.15rem;
-    text-underline-offset: 0.32rem;
-  }
-
-  .text-link::after {
-    content: "↗";
-  }
-
   .announcement {
     padding: 0.48rem 1rem;
     color: var(--cream-100);
@@ -2172,48 +2147,6 @@ trovito-chat[data-open="true"] {
     gap: 0.65rem;
     margin-right: auto;
     color: var(--forest-900);
-  }
-
-  .brand__mark {
-    position: relative;
-    width: 2.85rem;
-    height: 2.85rem;
-    flex: 0 0 auto;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 68% 22%, rgb(217 255 114 / 75%) 0 19%, transparent 20%),
-      radial-gradient(circle at 32% 72%, rgb(91 156 146 / 38%) 0 28%, transparent 29%),
-      var(--lime-200);
-  }
-
-  .brand__mark::after {
-    position: absolute;
-    top: 50%;
-    left: -0.25rem;
-    width: 3.4rem;
-    height: 2px;
-    content: "";
-    background: var(--forest-900);
-    transform: rotate(-5deg);
-  }
-
-  .brand__copy {
-    font-family: var(--display);
-    font-size: 1.05rem;
-    font-style: italic;
-    font-weight: 700;
-    line-height: 1;
-  }
-
-  .brand__copy small {
-    display: block;
-    margin-top: 0.3rem;
-    font-family: var(--body);
-    font-size: 0.48rem;
-    font-style: normal;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
   }
 
   .nav-links {
@@ -2552,43 +2485,8 @@ trovito-chat[data-open="true"] {
     letter-spacing: 0.08em;
   }
 
-  .scroll-cue {
-    position: absolute;
-    right: max(1rem, calc((100% - var(--container)) / 2));
-    bottom: 2rem;
-    display: grid;
-    width: 3rem;
-    height: 3rem;
-    place-items: center;
-    color: var(--white);
-    border: 1px solid rgb(255 255 255 / 50%);
-    border-radius: 50%;
-    animation: float 2.4s ease-in-out infinite;
-  }
-
   .history-media {
     min-height: 38rem;
-  }
-
-  .history-stamp {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 2;
-    width: 8rem;
-    padding: 1.1rem;
-    color: var(--forest-950);
-    background: var(--lime-200);
-    border-radius: 50%;
-    font-family: var(--display);
-    font-size: 1.1rem;
-    line-height: 1;
-    text-align: center;
-    text-transform: uppercase;
-    aspect-ratio: 1;
-    display: grid;
-    place-items: center;
-    transform: rotate(-7deg);
   }
 
   .reviews-head {
@@ -2645,23 +2543,6 @@ trovito-chat[data-open="true"] {
     color: var(--ink-soft);
   }
 
-  .visit-card {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    overflow: hidden;
-    color: var(--white);
-    background: var(--forest-900);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-  }
-
-  .visit-card__copy {
-    display: grid;
-    align-content: center;
-    gap: 1.5rem;
-    padding: clamp(2rem, 5vw, 4.5rem);
-  }
-
   .hours-list {
     display: grid;
   }
@@ -2676,28 +2557,6 @@ trovito-chat[data-open="true"] {
 
   .hours-list dt {
     color: rgb(255 255 255 / 70%);
-  }
-
-  .map-preview {
-    position: relative;
-    display: grid;
-    min-height: 34rem;
-    place-items: center;
-    background:
-      linear-gradient(rgb(223 255 140 / 20%), rgb(21 58 54 / 55%)),
-      url("https://framerusercontent.com/images/xLcZlOg9eMD724HGC62vazBzBk.jpg?height=720&width=1280")
-        center / cover;
-  }
-
-  .map-preview::before {
-    width: 4.25rem;
-    height: 4.25rem;
-    content: "";
-    background: var(--lime-200);
-    border: 0.9rem solid rgb(255 255 255 / 80%);
-    border-radius: 50% 50% 50% 0;
-    box-shadow: var(--shadow-md);
-    transform: rotate(-45deg);
   }
 
   .map-preview .button {
@@ -3074,29 +2933,6 @@ trovito-chat[data-open="true"] {
     font-size: 0.75rem;
   }
 
-  .whatsapp-fab {
-    position: fixed;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 80;
-    display: grid;
-    width: 3.6rem;
-    height: 3.6rem;
-    place-items: center;
-    color: var(--forest-950);
-    background: var(--lime-200);
-    border: 3px solid var(--cream-100);
-    border-radius: 50%;
-    box-shadow: var(--shadow-md);
-    font-size: 1.3rem;
-    font-weight: 900;
-    transition: transform 220ms var(--ease);
-  }
-
-  .whatsapp-fab:hover {
-    transform: translateY(-0.25rem) rotate(-4deg);
-  }
-
   @keyframes float {
     0%,
     100% {
@@ -3322,9 +3158,6 @@ trovito-chat[data-open="true"] {
     margin-top: 1.6rem;
   }
 
-  .muted {
-    color: var(--ink-soft);
-  }
 }
 
 @layer responsive {
@@ -3446,15 +3279,6 @@ trovito-chat[data-open="true"] {
       letter-spacing: 0.08em;
     }
 
-    .brand__mark {
-      width: 2.25rem;
-      height: 2.25rem;
-    }
-
-    .brand__copy {
-      font-size: 0.85rem;
-    }
-
     .hero {
       min-height: calc(100svh - 1rem);
       background-position: 58% center;
@@ -3462,10 +3286,6 @@ trovito-chat[data-open="true"] {
 
     .hero .display-title {
       font-size: clamp(3.7rem, 19vw, 6rem);
-    }
-
-    .scroll-cue {
-      display: none;
     }
 
     .cards,
@@ -3500,9 +3320,6 @@ trovito-chat[data-open="true"] {
       flex-direction: column;
     }
 
-    .map-preview {
-      min-height: 25rem;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -3604,22 +3421,6 @@ trovito-chat[data-open="true"] {
     text-transform: uppercase;
   }
 
-  .catalog-image-placeholder {
-    width: min(100%, 94.75rem);
-    aspect-ratio: 1516 / 338;
-    margin: 6rem auto 0;
-    overflow: hidden;
-    background:
-      linear-gradient(135deg, rgb(180 232 90 / 20%), rgb(44 75 72 / 12%)),
-      var(--cream-300);
-    border: 1px dashed rgb(28 18 8 / 26%);
-    border-radius: 1.375rem;
-  }
-
-  .catalog-image-placeholder[hidden] {
-    display: none;
-  }
-
   .product-catalog .flavor-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3697,10 +3498,6 @@ trovito-chat[data-open="true"] {
       margin-top: 6rem;
     }
 
-    .catalog-image-placeholder {
-      margin-top: 4.5rem;
-    }
-
     .product-catalog .flavor-grid {
       gap: 3.5rem 3rem;
       margin-top: 4.5rem;
@@ -3722,12 +3519,6 @@ trovito-chat[data-open="true"] {
 
     .catalog-category-title {
       font-size: clamp(2.8rem, 12vw, 4rem);
-    }
-
-    .catalog-image-placeholder {
-      aspect-ratio: 16 / 6;
-      margin-top: 3.5rem;
-      border-radius: 1rem;
     }
 
     .product-catalog .flavor-grid {
@@ -4186,7 +3977,6 @@ trovito-chat[data-open="true"] {
     .footer-map {
       grid-column: 1 / -1;
     }
-  }
 
   .footer-map {
     height: auto;
@@ -4202,6 +3992,8 @@ trovito-chat[data-open="true"] {
     aspect-ratio: auto;
   }
 
+  }
+
   @media (max-width: 52rem) {
     .visit-hours-section .visit-section__grid {
       gap: 2rem;
@@ -4211,6 +4003,7 @@ trovito-chat[data-open="true"] {
       height: 15rem;
       min-height: 15rem;
     }
+
   }
 }
 

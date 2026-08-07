@@ -46,7 +46,7 @@ window.FLAVORS = [
     "Chocolate Rocher",
     "Con avellanas y crocante",
     "clasicos",
-    "assets/productos/chocolate-rocher.jpg",
+    "assets/productos/chocolate-rocher.webp",
   ),
   product("Chocolate split", "Chocolate y banana", "clasicos"),
   product(
@@ -80,7 +80,7 @@ window.FLAVORS = [
     "Dulce de leche tentación",
     "Con más dulce de leche",
     "clasicos",
-    "assets/productos/dulce-de-leche-tentacion.jpg",
+    "assets/productos/dulce-de-leche-tentacion.webp",
   ),
   product(
     "Frambuesa granizada",
@@ -105,7 +105,7 @@ window.FLAVORS = [
     "Menta granizada",
     "Con chispas de chocolate. También con mini Oreo",
     "clasicos",
-    "assets/productos/menta-granizada.jpg",
+    "assets/productos/menta-granizada.webp",
   ),
   product(
     "Menta granizada con galletitas mini Oreo",

@@ -1,0 +1,41 @@
+# ─────────────────────────────────────────────────────────────────────
+#  Los Trovadores · configuración de Apache (cPanel)
+# ─────────────────────────────────────────────────────────────────────
+
+# Tipos MIME. Sin esto, algunos servidores mandan los .webp como archivo
+# genérico y el navegador no los dibuja.
+<IfModule mod_mime.c>
+  AddType image/webp  .webp
+  AddType image/avif  .avif
+  AddType image/svg+xml .svg
+  AddType font/woff2  .woff2
+</IfModule>
+
+# Compresión de texto
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml \
+    application/javascript application/json image/svg+xml
+</IfModule>
+
+# Caché del navegador: las imágenes y el CSS cambian poco.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp     "access plus 1 year"
+  ExpiresByType image/png      "access plus 1 year"
+  ExpiresByType image/jpeg     "access plus 1 year"
+  ExpiresByType image/svg+xml  "access plus 1 year"
+  ExpiresByType text/css       "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html      "access plus 1 hour"
+</IfModule>
+
+# Los archivos de configuración privados nunca se sirven por web.
+<FilesMatch "^\.(forms|google-reviews)\.env\.php$">
+  Require all denied
+</FilesMatch>
+
+# Cabeceras de seguridad básicas
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

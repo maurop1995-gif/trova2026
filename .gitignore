@@ -11,3 +11,6 @@ output/
 .build/
 scripts/
 assets/productos/originales-heic/
+
+# Utilidad local de vista previa
+previsualizar.command
