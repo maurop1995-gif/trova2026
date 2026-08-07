@@ -150,10 +150,10 @@ class BusinessCta extends HTMLElement {
           </div>
           <figure class="business-cta__image">
             <img
-              src="https://framerusercontent.com/images/A5RZjnp90ePr8dCXXuoILuDKggI.jpeg?height=1376&width=768"
-              alt="Presentación de helados artesanales de Los Trovadores"
-              width="768"
-              height="1376"
+              src="assets/bici.jpeg"
+              alt="Bicicleta con carro de helados artesanales"
+              width="1600"
+              height="1067"
               loading="lazy"
             >
           </figure>
@@ -227,6 +227,16 @@ class SiteFooter extends HTMLElement {
                   ${SITE.city}
                 </a>
               </address>
+              <dl class="footer-hours" aria-label="Horarios de atención">
+                <div>
+                  <dt>Lunes - Domingo</dt>
+                  <dd>11:00 - 23:45</dd>
+                </div>
+                <div>
+                  <dt>Viernes y Sábado</dt>
+                  <dd>Hasta las 00:30</dd>
+                </div>
+              </dl>
             </div>
             <div class="footer-map">
               <iframe

@@ -1533,11 +1533,11 @@
 
   .site-footer > .container {
     width: 100%;
-    max-width: 80rem;
+    max-width: none;
   }
 
   .footer-grid {
-    grid-template-columns: 20rem 15rem 20rem 1fr;
+    grid-template-columns: 1.05fr 0.8fr 1.3fr 1.35fr;
     gap: 0;
   }
 
@@ -1549,6 +1549,10 @@
 
   .footer-grid > div:first-child {
     border-left: 0;
+  }
+
+  .footer-contact {
+    padding-inline: 2rem !important;
   }
 
   .site-footer .brand {
@@ -1572,10 +1576,23 @@
   }
 
   .footer-bottom {
+    position: relative;
     margin-top: 0;
     padding: 1rem 2.5rem;
     color: rgb(28 18 8 / 58%);
-    border-top: 1px solid rgb(28 18 8 / 12%);
+    border-top: 0;
+  }
+
+  .footer-bottom::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 1px;
+    content: "";
+    background: rgb(28 18 8 / 12%);
+    pointer-events: none;
+    transform: translateX(-50%);
   }
 
   .whatsapp-fab {
@@ -2976,6 +2993,33 @@
     color: var(--lime-200);
   }
 
+  .footer-hours {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.55rem 1.25rem;
+    justify-content: start;
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem 0 0;
+  }
+
+  .footer-hours div {
+    display: contents;
+  }
+
+  .footer-hours dt {
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .footer-hours dd {
+    margin: 0;
+    font-size: 0.9rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+
   .footer-bottom {
     display: flex;
     align-items: center;
@@ -3114,7 +3158,10 @@
 
     .mobile-links {
       width: min(100%, 28rem);
-      margin-top: auto;
+      min-height: min-content;
+      flex: 1 1 auto;
+      align-content: center;
+      margin-top: 0;
     }
 
     .mobile-panel a:not(.button) {
@@ -3127,7 +3174,7 @@
     .mobile-actions {
       width: min(100%, 28rem);
       margin-top: 0;
-      margin-bottom: auto;
+      margin-bottom: 0;
       padding-top: 1.25rem;
       border-top: 1px solid rgb(28 18 8 / 12%);
     }
@@ -3773,7 +3820,7 @@
     margin-top: 1.5rem;
     margin-bottom: 0;
     color: var(--forest-900);
-    font-size: 0.92rem;
+    font-size: 1rem;
     letter-spacing: 0.08em;
     line-height: 1.45;
   }
@@ -3947,13 +3994,18 @@
     text-align: center;
   }
 
+  .footer-grid > div:first-child .brand {
+    margin-bottom: 0;
+  }
+
   .footer-socials-heading {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     text-align: center;
   }
 
   .footer-socials {
     width: 100%;
+    margin-top: 2rem;
     justify-content: center;
   }
 
@@ -4002,6 +4054,48 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .nav-actions {
+    align-self: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-right: 2.5rem;
+    transform: translateY(-0.25rem);
+  }
+
+  .site-nav > .brand {
+    transform: translateY(-0.25rem);
+  }
+
+  .business-cta__image {
+    position: relative;
+    width: calc(100% - 2rem);
+    min-height: 0;
+    align-self: center;
+    justify-self: center;
+    aspect-ratio: 160 / 99;
+    border: 0.5rem solid var(--cream-100);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    transform: translateX(-0.5rem);
+  }
+
+  .business-cta__image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: auto;
+    transform: translateY(-0.75%);
+  }
+
+  @media (max-width: 52rem) {
+    .business-cta__image {
+      width: calc(100% - 1.5rem);
+      transform: none;
+    }
   }
 
   .visit-hours-section .visit-section__grid {
