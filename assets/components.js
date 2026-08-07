@@ -3,7 +3,7 @@ const SITE = {
   phoneHref: "+59827075165",
   whatsapp: "59898388553",
   email: "info@lostrovadores.com.uy",
-  address: "Gabriel Pereira 3202, esq. Pedro Berro",
+  address: "Gabriel Pereira 3202,",
   city: "Pocitos, Montevideo, Uruguay",
   instagram: "https://www.instagram.com/heladerialostrovadores/",
   facebook: "https://www.facebook.com/heladeria.lostrovadores",
@@ -221,7 +221,7 @@ class SiteFooter extends HTMLElement {
                 <a href="tel:${SITE.phoneHref}">${SITE.phoneDisplay}</a>
                 <a href="mailto:${SITE.email}">${SITE.email}</a>
                 <a href="${SITE.maps}" target="_blank" rel="noopener">
-                  ${SITE.address}
+                  ${SITE.address} <span class="address-nowrap">esq. Pedro Berro</span>
                 </a>
                 <a href="${SITE.maps}" target="_blank" rel="noopener">
                   ${SITE.city}
@@ -253,20 +253,41 @@ class SiteFooter extends HTMLElement {
           </div>
         </div>
       </footer>
-      <a
-        class="whatsapp-fab"
-        href="https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
-          "Hola, quisiera hacer una consulta.",
-        )}"
-        target="_blank"
-        rel="noopener"
-        aria-label="Consultar por WhatsApp"
-        title="WhatsApp"
-      >W</a>
+      <trovito-chat></trovito-chat>
     `;
+  }
+}
+
+class TrovitoChat extends HTMLElement {
+  connectedCallback() {
+    if (this.dataset.ready === "true") return;
+    this.dataset.ready = "true";
+    this.dataset.open = "false";
+    this.setAttribute("aria-label", "Don Trovito te responde");
+    this.innerHTML = `
+      <iframe
+        class="trovito-chat__frame"
+        src="trovito-chatbot.html?embed=1"
+        title="Don Trovito te responde"
+        loading="eager"
+      ></iframe>
+    `;
+
+    this.frame = this.querySelector("iframe");
+    this.onMessage = (event) => {
+      if (event.source !== this.frame?.contentWindow) return;
+      if (event.data?.source !== "don-trovito") return;
+      this.dataset.open = event.data.state === "open" ? "true" : "false";
+    };
+    window.addEventListener("message", this.onMessage);
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener("message", this.onMessage);
   }
 }
 
 customElements.define("site-header", SiteHeader);
 customElements.define("business-cta", BusinessCta);
+customElements.define("trovito-chat", TrovitoChat);
 customElements.define("site-footer", SiteFooter);

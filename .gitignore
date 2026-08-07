@@ -1,4 +1,13 @@
+# Sistema
 .DS_Store
+
+# Configuración privada (nunca se publica)
 .google-reviews.env.php
 .forms.env.php
 api/cache/*.json
+
+# Material de producción que no forma parte del sitio
+output/
+.build/
+scripts/
+assets/productos/originales-heic/

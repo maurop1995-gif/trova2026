@@ -51,6 +51,48 @@
   }
 }
 
+/* Don Trovito · widget global */
+trovito-chat {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 2147482900;
+  display: block;
+  width: min(320px, 100vw);
+  height: 190px;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    width 260ms cubic-bezier(.4, 0, .2, 1),
+    height 260ms cubic-bezier(.4, 0, .2, 1);
+}
+
+trovito-chat[data-open="true"] {
+  width: min(448px, 100vw);
+  height: min(708px, 100dvh);
+}
+
+.trovito-chat__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color-scheme: light dark;
+  pointer-events: auto;
+}
+
+@media (max-width: 32.5rem) {
+  trovito-chat[data-open="true"] {
+    width: 100vw;
+    height: 100dvh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  trovito-chat { transition: none; }
+}
+
 @layer framer-match {
   .section.visit-hours-section {
     padding-block: 2.65rem 5rem;
@@ -4531,6 +4573,83 @@
     .form-success,
     .form-success__check {
       animation: none;
+    }
+  }
+}
+
+/* Ajustes solicitados exclusivamente para la experiencia móvil. */
+@layer framer-match {
+  @media (max-width: 52rem) {
+    .address-nowrap {
+      white-space: nowrap;
+    }
+
+    .footer-hours {
+      grid-template-columns: max-content max-content;
+      justify-content: center;
+    }
+
+    .footer-hours dt {
+      text-align: right;
+    }
+
+    .footer-hours dd {
+      text-align: left;
+    }
+
+    .footer-map {
+      border-top: 0;
+    }
+
+    .visit-hours-section .hours-list div + div {
+      border-top: 0;
+    }
+
+    .visit-hours-section .visit-address {
+      display: flex;
+      justify-content: center;
+    }
+
+    .visit-hours-section .visit-address::after,
+    .visit-address__pin {
+      display: none;
+    }
+
+    .visit-hours-section .visit-address > span:last-child {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .mobile-links {
+      width: min(100%, 28rem);
+      flex: 1 1 auto;
+      align-content: space-evenly;
+      row-gap: clamp(0.85rem, 2.5svh, 1.5rem);
+    }
+
+    .mobile-panel a:not(.button) {
+      width: 100%;
+      padding-block: 0.5rem;
+    }
+  }
+
+  @media (max-width: 23rem) {
+    .footer-hours {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+      justify-items: center;
+    }
+
+    .footer-hours dt,
+    .footer-hours dd {
+      text-align: center;
+    }
+
+    .footer-hours div {
+      display: grid;
+      justify-items: center;
+      margin-bottom: 0.65rem;
     }
   }
 }
