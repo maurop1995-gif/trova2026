@@ -6453,13 +6453,14 @@ trovito-chat[data-open="true"] {
   body[data-page="inicio"] .hero .hero-action--primary {
     color: var(--white);
     background: var(--brand-dark);
+    border-color: var(--white);
     box-shadow: 0 10px 24px rgb(var(--brand-dark-rgb) / 28%);
   }
 
   body[data-page="inicio"] .hero .hero-action--primary:hover {
     color: var(--white);
     background: transparent;
-    border-color: rgb(var(--white-rgb) / 86%);
+    border-color: var(--white);
     box-shadow: none;
   }
 
