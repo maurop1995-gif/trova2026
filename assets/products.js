@@ -7,7 +7,14 @@ const product = (name, description, category, image = "") => ({
 
 window.FLAVOR_CATEGORIES = [
   { key: "clasicos", label: "Sabores clásicos" },
-  { key: "sin-azucar", label: "Sabores sin azúcar" },
+  {
+    key: "sin-azucar",
+    label: "Sabores sin azúcar",
+    photo: {
+      src: "assets/adu-productos/helado-1l.webp",
+      alt: "Pote de helado artesanal con varios sabores",
+    },
+  },
   { key: "sin-lactosa", label: "Sabores sin lactosa" },
   { key: "sin-gluten", label: "Sabores sin gluten" },
   { key: "barritas-veganas", label: "Barritas veganas" },

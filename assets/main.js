@@ -132,9 +132,8 @@ const setupMap = () => {
     () => {
       const wrapper = trigger.closest("[data-map-wrapper]");
       const iframe = document.createElement("iframe");
-      iframe.src =
-        "https://maps.google.com/maps?q=Gabriel%20Pereira%203202%20Montevideo&t=&z=15&ie=UTF8&iwloc=&output=embed";
-      iframe.title = "Mapa de Heladería Los Trovadores";
+      iframe.src = SITE.maps.embedUrl;
+      iframe.title = SITE.maps.title;
       iframe.loading = "lazy";
       iframe.referrerPolicy = "no-referrer-when-downgrade";
       wrapper.replaceChildren(iframe);
@@ -147,13 +146,15 @@ const setupFlavors = () => {
   const grid = document.querySelector("[data-flavor-grid]");
   const controls = document.querySelector("[data-flavor-controls]");
   const title = document.querySelector("[data-flavor-title]");
+  const categoryPhoto = document.querySelector("[data-category-photo]");
+  const categoryPhotoImage = document.querySelector(
+    "[data-category-photo-image]",
+  );
+  const ceapsGuide = document.querySelector("[data-ceaps-guide]");
   if (!grid || !controls || !title || !window.FLAVORS) return;
 
   const categories = new Map(
-    (window.FLAVOR_CATEGORIES || []).map((category) => [
-      category.key,
-      category.label,
-    ]),
+    (window.FLAVOR_CATEGORIES || []).map((category) => [category.key, category]),
   );
 
   controls.querySelectorAll("[data-category]").forEach((control) => {
@@ -163,9 +164,25 @@ const setupFlavors = () => {
   const render = (category) => {
     const matches = window.FLAVORS.filter((item) => item.category === category);
     const activeButton = controls.querySelector(`[data-category="${category}"]`);
+    const categoryData = categories.get(category);
 
-    title.textContent = categories.get(category) || "Sabores y productos";
+    title.textContent = categoryData?.label || "Sabores y productos";
     if (activeButton?.id) grid.setAttribute("aria-labelledby", activeButton.id);
+
+    if (categoryPhoto) {
+      categoryPhoto.hidden = !categoryData?.photo;
+      categoryPhoto.classList.toggle(
+        "has-image",
+        Boolean(categoryData?.photo?.src),
+      );
+      if (categoryPhotoImage && categoryData?.photo?.src) {
+        categoryPhotoImage.src = categoryData.photo.src;
+        categoryPhotoImage.alt = categoryData.photo.alt || "";
+      }
+    }
+
+    const isSugarFree = category === "sin-azucar";
+    if (ceapsGuide) ceapsGuide.hidden = !isSugarFree;
 
     grid.innerHTML = matches.length
       ? matches
@@ -203,9 +220,19 @@ const setupFlavors = () => {
       `;
   };
 
-  const scrollToResults = () => {
+  const scrollToResults = ({ smooth = true } = {}) => {
     requestAnimationFrame(() => {
-      title.scrollIntoView({
+      grid.scrollIntoView({
+        behavior: !smooth ? "instant" : reducedMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+  };
+
+  const scrollToCeapsGuide = () => {
+    if (!ceapsGuide) return;
+    requestAnimationFrame(() => {
+      ceapsGuide.scrollIntoView({
         behavior: reducedMotion ? "auto" : "smooth",
         block: "start",
       });
@@ -247,21 +274,44 @@ const setupFlavors = () => {
   */
   const categoriaInicial = () => {
     const hash = decodeURIComponent(window.location.hash.replace("#", ""));
+    if (hash === "guia-ceaps") return "sin-azucar";
     return categories.has(hash) ? hash : "clasicos";
   };
 
-  const abrirCategoria = (key, { desplazar = false } = {}) => {
+  const abrirCategoria = (
+    key,
+    {
+      desplazar = false,
+      mostrarGuiaCeaps = false,
+      desplazamientoSuave = true,
+    } = {},
+  ) => {
     marcarActivo(controls.querySelector(`[data-category="${key}"]`));
     render(key);
-    if (desplazar) scrollToResults();
+    if (mostrarGuiaCeaps) {
+      scrollToCeapsGuide();
+    } else if (desplazar) {
+      scrollToResults({ smooth: desplazamientoSuave });
+    }
   };
 
   window.addEventListener("hashchange", () => {
     const key = categoriaInicial();
-    abrirCategoria(key, { desplazar: true });
+    abrirCategoria(key, {
+      desplazar: true,
+      mostrarGuiaCeaps: window.location.hash === "#guia-ceaps",
+    });
   });
 
-  abrirCategoria(categoriaInicial());
+  const categoriaDeEntrada = categoriaInicial();
+  const hashDeEntrada = decodeURIComponent(
+    window.location.hash.replace("#", ""),
+  );
+  abrirCategoria(categoriaDeEntrada, {
+    desplazar: categories.has(hashDeEntrada),
+    mostrarGuiaCeaps: window.location.hash === "#guia-ceaps",
+    desplazamientoSuave: false,
+  });
 };
 
 /* Un solo lugar define el número de WhatsApp: el objeto SITE. */
@@ -339,9 +389,67 @@ window.addEventListener(
   { passive: true },
 );
 
-// Datos que se sincronizan con el perfil real de Google: el puntaje y el
-// total de reseñas. Los testimonios del carrusel son fijos y se editan a
-// mano en index.html, por eso no se presentan como reseñas de Google.
+const renderGoogleReviews = (reviews) => {
+  const track = document.querySelector("[data-google-reviews]");
+  if (!track || !Array.isArray(reviews) || !reviews.length) return;
+
+  const fragment = document.createDocumentFragment();
+  reviews.forEach((review) => {
+    const article = document.createElement("article");
+    article.className = "review-card";
+
+    const stars = document.createElement("div");
+    const rating = Math.max(1, Math.min(5, Math.round(Number(review.rating) || 5)));
+    stars.className = "hero__stars";
+    stars.setAttribute("aria-label", `${rating} de 5 estrellas`);
+    stars.textContent = `${"★".repeat(rating)}${"☆".repeat(5 - rating)}`;
+
+    const quote = document.createElement("blockquote");
+    quote.textContent = `“${String(review.text || "").trim()}”`;
+
+    const author = document.createElement("div");
+    author.className = "review-author";
+    if (review.author_photo_uri) {
+      const photo = document.createElement("img");
+      photo.src = review.author_photo_uri;
+      photo.alt = "";
+      photo.width = 128;
+      photo.height = 128;
+      photo.loading = "lazy";
+      photo.referrerPolicy = "no-referrer";
+      author.append(photo);
+    }
+
+    const authorCopy = document.createElement("div");
+    const citation = document.createElement("cite");
+    if (review.author_uri) {
+      const link = document.createElement("a");
+      link.href = review.author_uri;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = review.author || "Cliente de Google";
+      citation.append(link);
+    } else {
+      citation.textContent = review.author || "Cliente de Google";
+    }
+    authorCopy.append(citation);
+    if (review.relative_time) {
+      const time = document.createElement("small");
+      time.textContent = review.relative_time;
+      authorCopy.append(time);
+    }
+    author.append(authorCopy);
+
+    article.append(stars, quote, author);
+    fragment.append(article);
+  });
+
+  track.replaceChildren(fragment);
+  requestAnimationFrame(setupReviewMarquees);
+};
+
+// Puntaje, cantidad y tarjetas se sincronizan diariamente con Google Places.
+// Si el servicio no responde, el HTML conserva sus testimonios de respaldo.
 const setupGoogleReviewCount = async () => {
   const countElements = document.querySelectorAll("[data-google-review-count]");
   const ratingElements = document.querySelectorAll("[data-google-rating]");
@@ -382,8 +490,17 @@ const setupGoogleReviewCount = async () => {
         element.textContent = `${formattedRating} / 5`;
       });
     }
+
+    renderGoogleReviews(data.reviews);
   } catch {
-    // Si Google no responde, quedan los valores escritos en el HTML.
+    /*
+      Si Google no responde no inventamos nada: el contador queda con su
+      texto neutro ("Reseñas de Google", sin cifra) y se esconde la nota
+      que promete sincronización diaria, que en ese momento no es cierta.
+    */
+    document.querySelectorAll("[data-google-status]").forEach((nota) => {
+      nota.hidden = true;
+    });
   }
 };
 

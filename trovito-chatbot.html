@@ -20,11 +20,8 @@
      · JSON-LD FAQPage automático → Google puede mostrar tus respuestas
        como resultado enriquecido.
 
-     CONFIGURACIÓN (1 minuto)
-     Buscá  const TROVITO  más abajo y completá:
-       · contact.whatsapp / phone / mapsUrl / instagram
-       · form.web3formsKey  → sacalo gratis en https://web3forms.com
-     Listo. No hay nada más que tocar.
+     Los datos públicos del local se leen desde assets/site-config.js.
+     La configuración propia del asistente vive en TROVITO más abajo.
 
      INTEGRACIÓN EN FRAMER
      Copiá los tres bloques —<style>, <div id="trovito">, <script>—
@@ -34,7 +31,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="assets/site-config.js"></script>
 
 <style>
 /* ═══════════════════════════════════════════════════════════════════════
@@ -88,8 +86,8 @@
   --m-exit:   cubic-bezier(.4, 0, 1, 1);
 
   /* — Tipografía — */
-  --f-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --f-display: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-display: "Bebas Neue", "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
 
   position: fixed; inset: 0; z-index: 2147483000;
   font-family: var(--f-sans); font-size: 15px; line-height: 1.5;
@@ -128,6 +126,8 @@
   flex-shrink: 0;
 }
 /* Saludo de galera: al hover / apertura, Don Trovito levanta el sombrero */
+.tv-launcher:hover .dt__hat,
+.tv-launcher:focus-visible .dt__hat,
 .dt-tip:hover .dt__hat,
 .dt-tip[data-greet="true"] .dt__hat { transform: translateY(-7px) rotate(-9deg); }
 
@@ -155,6 +155,19 @@
 .tv-launcher:active { transform: translateY(-1px) scale(.985); }
 .tv-launcher__mark { width: 52px; height: 52px; }
 .tv-launcher__mark .dt-medallion { width: 100%; height: 100%; }
+.tv-launcher__mark .dt {
+  transform: scale(1.14);
+  transform-origin: 50% 52%;
+}
+.tv-launcher:hover .tv-launcher__mark .dt,
+.tv-launcher:focus-visible .tv-launcher__mark .dt {
+  animation: trovito-character-greet .7s var(--m-spring) both;
+}
+@keyframes trovito-character-greet {
+  0%, 100% { transform: translateY(0) rotate(0) scale(1.14); }
+  42% { transform: translateY(-2px) rotate(2.5deg) scale(1.2); }
+  72% { transform: translateY(-1px) rotate(-1.25deg) scale(1.17); }
+}
 .tv-launcher__txt {
   display: grid; text-align: left;
   max-width: 0; opacity: 0; overflow: hidden;
@@ -322,6 +335,20 @@
 
 /* ── Bienvenida editorial ───────────────────────────────────────────── */
 .tv-hero { padding: 2px 4px 14px; }
+.tv-hero__mark {
+  width: 64px; height: 64px; margin-bottom: 12px;
+}
+.tv-hero__mark .dt-medallion {
+  width: 100%; height: 100%;
+  box-shadow: inset 0 0 0 1.5px var(--s-gold-line);
+}
+.tv-hero__kicker {
+  font-family: var(--f-display);
+  font-size: 25px; font-weight: 600; line-height: 1.15;
+  letter-spacing: -.02em; color: var(--s-ink);
+  margin-bottom: 6px;
+}
+.tv-hero__kicker em { font-style: normal; color: var(--c-forest); }
 .tv-hero__rule {
   display: flex; align-items: center; gap: 9px; margin-bottom: 13px;
   font-size: 10px; font-weight: 700; letter-spacing: .17em;
@@ -332,6 +359,7 @@
   background: linear-gradient(90deg, var(--s-gold-line), transparent);
 }
 .tv-hero__h {
+  font-family: var(--f-display);
   font-size: 25px; font-weight: 600; letter-spacing: -.028em;
   line-height: 1.18; margin-bottom: 8px;
 }
@@ -643,6 +671,7 @@
   .tv-panel { height: calc(100dvh - 20px); bottom: 10px; }
   .tv-body { padding-top: 12px; }
   .tv-head { padding-top: 11px; padding-bottom: 11px; }
+  .tv-hero__mark { width: 56px; height: 56px; margin-bottom: 9px; }
   .tv-hero__p { display: none; }
   .tv-item { min-height: 70px; padding: 9px 11px; }
   .tv-foot { display: none; }
@@ -695,7 +724,7 @@
 .tv-head__name {
   display: block;
   font-family: var(--f-sans);
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -.015em;
@@ -727,6 +756,25 @@
     var(--s-ivory);
 }
 .tv-hero { padding: 2px 2px 14px; }
+.tv-hero__mark {
+  width: 76px; height: 76px;
+  margin-bottom: 14px;
+}
+.tv-hero__mark .dt-medallion {
+  background: linear-gradient(155deg, var(--c-forest-100) 0%, var(--s-sand) 100%);
+  box-shadow: inset 0 0 0 1.5px var(--s-gold-line);
+}
+.tv-hero__kicker {
+  max-width: 13ch;
+  margin-bottom: 7px;
+  font-family: var(--f-display);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: .025em;
+  color: var(--s-ink);
+}
+.tv-hero__kicker em { font-style: normal; color: var(--c-forest); }
 .tv-hero__rule {
   display: inline-flex;
   width: max-content;
@@ -749,12 +797,14 @@
 }
 .tv-hero__rule::after { display: none; }
 .tv-hero__h {
-  max-width: 12ch;
-  margin-bottom: 9px;
-  font-size: 27px;
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -.045em;
+  max-width: 26ch;
+  margin-bottom: 8px;
+  font-family: var(--f-sans);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: var(--s-ink);
 }
 .tv-hero__h em { color: var(--c-forest); }
 .tv-hero__p {
@@ -880,7 +930,7 @@
 .tv-go[disabled] { background: var(--s-sand); color: var(--s-ink-45); opacity: 1; }
 .tv-foot { margin-top: 8px; font-size: 9.5px; color: var(--s-ink-45); }
 
-.tv-launcher {
+#trovito .tv-launcher {
   height: 58px;
   padding: 4px;
   border-radius: 18px;
@@ -889,12 +939,28 @@
 }
 .tv-launcher::before { box-shadow: inset 0 0 0 1px rgba(255,255,255,.09); }
 .tv-launcher__mark { width: 50px; height: 50px; }
-.tv-launcher__t1 { font-family: var(--f-sans); font-size: 13px; font-weight: 700; letter-spacing: -.01em; }
-.tv-launcher__t2 { margin-top: 2px; font-size: 10.5px; color: rgba(255,255,255,.68); }
-.tv-launcher__txt {
+.tv-launcher__t1 { font-family: var(--f-sans); font-size: 16px; font-weight: 800; letter-spacing: -.02em; }
+#trovito .tv-launcher__t2 {
+  margin-top: 2px;
+  padding-right: 4px;
+  font-size: 11px;
+  letter-spacing: -.01em;
+  color: rgba(255,255,255,.68);
+}
+#trovito .tv-launcher__txt {
   max-width: 220px;
   opacity: 1;
-  padding: 0 15px 0 10px;
+  padding: 0 22px 0 11px;
+}
+/*
+  En la web principal el iframe cerrado mide lo mismo que el personaje. Así
+  no existe una etiqueta invisible por encima de los controles de la página.
+  La versión independiente conserva el launcher con texto completo.
+*/
+body.trovito-embed #trovito .tv-launcher__txt {
+  max-width: 0;
+  opacity: 0;
+  padding: 0;
 }
 .tv-launcher:hover { transform: translateY(-2px); }
 .tv-launcher__dot { top: 2px; right: 2px; }
@@ -930,6 +996,7 @@
 @media (max-height: 700px) and (min-width: 521px) {
   .tv-panel { height: calc(100dvh - 20px); bottom: 10px; }
   .tv-body { padding-top: 16px; }
+  .tv-hero__mark { width: 60px; height: 60px; margin-bottom: 10px; }
   .tv-hero__p { margin-bottom: 14px; }
   .tv-item { min-height: 82px; }
 }
@@ -937,10 +1004,12 @@
 @media (max-width: 520px) {
   .tv-panel { width: 100%; height: 100dvh; max-height: 100dvh; border-radius: 0; }
   .tv-head { padding: calc(14px + env(safe-area-inset-top, 0px)) 10px 11px 13px; }
-  .tv-head__name { font-size: 14px; }
+  .tv-head__name { font-size: 13.5px; }
   .tv-head__mark { width: 40px; height: 40px; flex-basis: 40px; }
   .tv-body { padding: 19px 14px 12px; }
-  .tv-hero__h { font-size: 26px; }
+  .tv-hero__mark { width: 68px; height: 68px; margin-bottom: 12px; }
+  .tv-hero__kicker { font-size: 32px; }
+  .tv-hero__h { font-size: 16.5px; }
   .tv-hero__p { margin-bottom: 18px; }
   .tv-menu { grid-template-columns: 1fr; gap: 8px; }
   .tv-item { min-height: 66px; align-items: center; padding: 11px 12px; }
@@ -961,12 +1030,12 @@ body.trovito-embed #trovito { background: transparent; }
 </style>
 </head>
 
-<body class="demo" style="margin:0;min-height:100dvh;background:#F6F8F7;font-family:Inter,system-ui,sans-serif;color:#14211E">
+<body class="demo" style="margin:0;min-height:100dvh;background:#F6F8F7;font-family:Poppins,system-ui,sans-serif;color:#14211E">
 
 <!-- ── Página de muestra · borrá esta sección al integrar ────────────── -->
 <main style="max-width:760px;margin:0 auto;padding:15vh 26px 45vh">
   <p style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#A5813F;font-weight:700">Los Trovadores · Heladería artesanal</p>
-  <h1 style="font-size:clamp(32px,6.5vw,52px);line-height:1.05;letter-spacing:-.03em;margin:14px 0 18px;font-weight:600">Don Trovito atiende.</h1>
+  <h1 style="font-family:'Bebas Neue','Arial Narrow',sans-serif;font-size:clamp(42px,7.5vw,64px);line-height:1;letter-spacing:.025em;margin:14px 0 18px;font-weight:400">Don Trovito atiende.</h1>
   <p style="font-size:17px;line-height:1.65;color:#4C5D5A;max-width:54ch">Tocá la galera abajo a la derecha. Preguntale por sabores, opciones sin azúcar, aptos celíacos, precios, tortas por encargo, delivery o medios de pago. Si algo no lo sabe, te toma el mensaje y responde una persona.</p>
 </main>
 
@@ -975,6 +1044,8 @@ body.trovito-embed #trovito { background: transparent; }
 <script>
 (function () {
   "use strict";
+
+  var SITE = window.SITE;
 
   var EMBED = false;
   try { EMBED = new URLSearchParams(window.location.search).get("embed") === "1"; } catch (e) {}
@@ -1000,11 +1071,11 @@ body.trovito-embed #trovito { background: transparent; }
     },
 
     contact: {
-      whatsapp:  "59898388553",           // ← solo números, con código de país
-      phone:     "+59827075165",          // ← fijo del local ("" si no aplica)
-      mapsUrl:   "https://www.google.com/maps/search/?api=1&query=Helader%C3%ADa+Los+Trovadores+Gabriel+Pereira+3202+Montevideo",
-      instagram: "https://www.instagram.com/heladerialostrovadores/",
-      email:     "info@lostrovadores.com.uy"
+      whatsapp: SITE.whatsapp,
+      phone:     SITE.phoneHref,
+      mapsUrl:   SITE.maps.searchUrl,
+      instagram: SITE.instagram,
+      email:     SITE.email
     },
 
     form: {
@@ -1014,7 +1085,7 @@ body.trovito-embed #trovito { background: transparent; }
     },
 
     behavior: {
-      nudgeDelay:    10000,               // ms hasta la invitación (0 = desactivar)
+      nudgeDelay:    0,                   // invitación automática desactivada
       nudgeText:     "¿Buscás un sabor o querés hacer un pedido? Te ayudo.",
       escalateAfter: 2,                   // consultas sin respuesta antes de ofrecer el formulario
       persist:       true,                // recordar la charla mientras dura la pestaña
@@ -1437,7 +1508,9 @@ body.trovito-embed #trovito { background: transparent; }
       p: ["horario", "horarios", "a que hora abren", "a que hora cierran", "abren",
           "cierran", "estan abiertos", "hoy abren", "abren los domingos", "feriado",
           "hasta que hora", "desde que hora", "estan abiertos ahora"],
-      a: "Los horarios **cambian según la temporada** — en verano estiramos bastante más que en invierno.\n\nPara no mandarte al pedo, te confirmamos el **horario de hoy** por WhatsApp o teléfono.",
+      a: "Nuestro horario es:\n\n" + SITE.hours.map(function (schedule) {
+        return "**" + schedule.label + "**\n" + schedule.opens + " - " + schedule.closes;
+      }).join("\n\n"),
       c: [{ t: "Consultar horario de hoy", a: "wa", v: "Hola, ¿cuál es el horario de hoy?", s: "gold" },
           { t: "Llamar", a: "tel" }]
     },
@@ -1446,7 +1519,8 @@ body.trovito-embed #trovito { background: transparent; }
       p: ["donde estan", "donde queda", "ubicacion", "direccion", "como llego",
           "en que barrio", "donde esta el local", "sucursal", "sucursales", "tienen local",
           "donde los encuentro", "mapa", "como llegar", "en que calle"],
-      a: "Estamos en **Montevideo, Uruguay**.\n\nAbrí el mapa para la ubicación exacta y el camino, o pedinos la referencia por WhatsApp si te queda más cómodo.",
+      a: "Estamos en **" + SITE.address.street + ", esquina " + SITE.address.corner +
+        "**, " + SITE.address.neighborhood + ", " + SITE.address.city + ".\n\nAbrí el mapa para ver el camino, o pedinos la referencia por WhatsApp si te queda más cómodo.",
       c: [{ t: "Ver en el mapa", a: "map", s: "gold" },
           { t: "Pedir la dirección", a: "wa", v: "Hola, ¿me pasan la dirección exacta del local?" },
           { t: "Horarios", a: "ask", v: "horarios" }]
@@ -1782,8 +1856,8 @@ body.trovito-embed #trovito { background: transparent; }
             'aria-controls="tvPanel" aria-label="Abrir el chat con ' + esc(C.brand.name) + '">' +
       '<span class="tv-launcher__mark dt-tip" id="tvGoMark">' + medallion(false) + "</span>" +
       '<span class="tv-launcher__txt">' +
-        '<span class="tv-launcher__t1">' + esc(C.brand.name) + "</span>" +
-        '<span class="tv-launcher__t2">Consultas, sabores y pedidos</span>' +
+        '<span class="tv-launcher__t1">Don Trovito</span>' +
+        '<span class="tv-launcher__t2">Te responde tus consultas</span>' +
       "</span>" +
       '<span class="tv-launcher__dot"></span>' +
     "</button>" +
@@ -1905,8 +1979,10 @@ body.trovito-embed #trovito { background: transparent; }
     hero = document.createElement("div");
     hero.className = "tv-hero";
     hero.innerHTML =
+      '<div class="tv-hero__mark">' + medallion(true) + "</div>" +
       '<div class="tv-hero__rule">Disponible ahora</div>' +
-      '<h2 class="tv-hero__h">Hola, ¿cómo te puedo ayudar?</h2>' +
+      '<p class="tv-hero__kicker">Hola, soy <em>Don Trovito</em>.</p>' +
+      '<h2 class="tv-hero__h">¿En qué podemos ayudarte?</h2>' +
       '<p class="tv-hero__p">Elegí un tema o escribí tu pregunta. Si hace falta, te conecto con el equipo.</p>' +
       '<div class="tv-menu__label">Temas frecuentes</div>' +
       '<div class="tv-menu">' +

@@ -1,15 +1,93 @@
-const SITE = {
-  phoneDisplay: "(+598) 2707 51 65",
-  phoneHref: "+59827075165",
-  whatsapp: "59898388553",
-  email: "info@lostrovadores.com.uy",
-  address: "Gabriel Pereira 3202,",
-  city: "Pocitos, Montevideo, Uruguay",
-  instagram: "https://www.instagram.com/heladerialostrovadores/",
-  facebook: "https://www.facebook.com/heladeria.lostrovadores",
-  tiktok: "https://www.tiktok.com/@heladerialostrovadores",
-  maps:
-    "https://www.google.com/maps/search/?api=1&query=Helader%C3%ADa+Los+Trovadores+Gabriel+Pereira+3202+Montevideo",
+if (!window.SITE) {
+  throw new Error("Falta cargar assets/site-config.js antes de components.js");
+}
+
+const SITE = window.SITE;
+
+const hoursMarkup = () =>
+  SITE.hours
+    .map(
+      ({ label, opens, closes }) => `
+        <div>
+          <dt>${label}</dt>
+          <dd>${opens} - ${closes}</dd>
+        </div>
+      `,
+    )
+    .join("");
+
+const hydrateSiteData = () => {
+  document.querySelectorAll("[data-site-hours]").forEach((list) => {
+    list.innerHTML = hoursMarkup();
+  });
+
+  document.querySelectorAll("[data-site-address-link]").forEach((link) => {
+    link.href = SITE.maps.searchUrl;
+    link.innerHTML = `
+      <span class="visit-address__pin" aria-hidden="true"></span>
+      <span>
+        ${SITE.address.street},
+        <span class="address-nowrap">esq. ${SITE.address.corner}</span>
+      </span>
+    `;
+  });
+
+  document.querySelectorAll("[data-site-contact-list]").forEach((list) => {
+    list.innerHTML = `
+      <p>
+        <small>Teléfono</small>
+        <a href="tel:${SITE.phoneHref}">${SITE.phoneDisplay}</a>
+      </p>
+      <p>
+        <small>Email</small>
+        <a href="mailto:${SITE.email}">${SITE.email}</a>
+      </p>
+      <p>
+        <small>Dirección</small>
+        <a href="${SITE.maps.searchUrl}" target="_blank" rel="noopener">
+          ${SITE.address.street}, esquina ${SITE.address.corner}<br>
+          ${SITE.address.neighborhood}, ${SITE.address.city}
+        </a>
+      </p>
+    `;
+  });
+
+  document.querySelectorAll("[data-site-map]").forEach((iframe) => {
+    iframe.src = SITE.maps.embedUrl;
+    iframe.title = SITE.maps.title;
+  });
+
+  document.querySelectorAll("[data-site-meta-address]").forEach((meta) => {
+    meta.content = `Estamos en ${SITE.address.street}, esquina ${SITE.address.corner}, ${SITE.address.neighborhood}.`;
+  });
+
+  const structuredData = document.querySelector("#local-business-data");
+  if (structuredData) {
+    structuredData.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": ["IceCreamShop", "LocalBusiness"],
+      name: SITE.name,
+      description: "Heladería artesanal en Pocitos desde 1934.",
+      url: "https://lostrovadores.com.uy/",
+      telephone: SITE.phoneHref,
+      email: SITE.email,
+      foundingDate: "1934",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: `${SITE.address.street}, esquina ${SITE.address.corner}`,
+        addressLocality: SITE.address.city,
+        addressRegion: SITE.address.region,
+        addressCountry: SITE.address.countryCode,
+      },
+      sameAs: [SITE.instagram, SITE.facebook, SITE.tiktok],
+      openingHoursSpecification: SITE.hours.map(({ days, opens, closes }) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: days,
+        opens,
+        closes,
+      })),
+    });
+  }
 };
 
 const pages = [
@@ -90,12 +168,13 @@ class SiteHeader extends HTMLElement {
 
     const toggle = this.querySelector(".menu-toggle");
     const panel = this.querySelector(".mobile-panel");
-    const closeMenu = () => {
+    const closeMenu = ({ restoreFocus = false } = {}) => {
       toggle.setAttribute("aria-expanded", "false");
       toggle.setAttribute("aria-label", "Abrir menú");
       panel.setAttribute("aria-hidden", "true");
       panel.classList.remove("is-open");
       document.body.classList.remove("menu-open");
+      if (restoreFocus) toggle.focus();
     };
 
     const openMenu = () => {
@@ -115,8 +194,7 @@ class SiteHeader extends HTMLElement {
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
-        closeMenu();
-        toggle.focus();
+        closeMenu({ restoreFocus: true });
       }
     });
 
@@ -124,8 +202,9 @@ class SiteHeader extends HTMLElement {
       if (event.target.closest("a")) closeMenu();
     });
 
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 1152) closeMenu();
+    const desktopHeader = window.matchMedia("(min-width: 72.01rem)");
+    desktopHeader.addEventListener("change", (event) => {
+      if (event.matches) closeMenu();
     });
   }
 }
@@ -145,7 +224,7 @@ class BusinessCta extends HTMLElement {
               para sumar a la carta de tu establecimiento o celebración.
             </p>
             <div class="button-row">
-              <a class="button button--light" href="contacto.html">Solicitar información</a>
+              <a class="button" href="contacto.html">Solicitar información</a>
             </div>
           </div>
           <figure class="business-cta__image">
@@ -221,36 +300,29 @@ class SiteFooter extends HTMLElement {
               <address class="footer-links footer-links--contact">
                 <a href="tel:${SITE.phoneHref}">${SITE.phoneDisplay}</a>
                 <a href="mailto:${SITE.email}">${SITE.email}</a>
-                <a href="${SITE.maps}" target="_blank" rel="noopener">
-                  ${SITE.address} <span class="address-nowrap">esq. Pedro Berro</span>
+                <a href="${SITE.maps.searchUrl}" target="_blank" rel="noopener">
+                  ${SITE.address.street}, <span class="address-nowrap">esq. ${SITE.address.corner}</span>
                 </a>
-                <a href="${SITE.maps}" target="_blank" rel="noopener">
-                  ${SITE.city}
+                <a href="${SITE.maps.searchUrl}" target="_blank" rel="noopener">
+                  ${SITE.address.neighborhood}, ${SITE.address.city}, ${SITE.address.country}
                 </a>
               </address>
               <dl class="footer-hours" aria-label="Horarios de atención">
-                <div>
-                  <dt>Lunes - Domingo</dt>
-                  <dd>11:00 - 23:45</dd>
-                </div>
-                <div>
-                  <dt>Viernes y Sábado</dt>
-                  <dd>Hasta las 00:30</dd>
-                </div>
+                ${hoursMarkup()}
               </dl>
             </div>
             <div class="footer-map">
               <iframe
-                src="https://maps.google.com/maps?q=Gabriel%20Pereira%203202%20Montevideo&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                title="Mapa de Heladería Los Trovadores"
+                src="${SITE.maps.embedUrl}"
+                title="${SITE.maps.title}"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
           </div>
           <div class="footer-bottom">
-            <p>© ${year} Los Trovadores. Todos los derechos reservados.</p>
             <p>Helado artesanal hecho desde 1934 en Montevideo, Uruguay</p>
+            <p>© ${year} Heladería Los Trovadores. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>
@@ -298,8 +370,8 @@ class TrovitoChat extends HTMLElement {
     this.innerHTML = `
       <iframe
         class="trovito-chat__frame"
-        src="trovito-chatbot.html?embed=1"
-        title="Don Trovito te responde"
+        src="trovito-chatbot.html?embed=1&amp;v=20260816-compact-launcher"
+        aria-label="Don Trovito te responde"
         loading="lazy"
       ></iframe>
     `;
@@ -317,6 +389,8 @@ class TrovitoChat extends HTMLElement {
     window.removeEventListener("message", this.onMessage);
   }
 }
+
+hydrateSiteData();
 
 customElements.define("site-header", SiteHeader);
 customElements.define("business-cta", BusinessCta);

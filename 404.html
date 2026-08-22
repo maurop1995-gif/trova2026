@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es-UY">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+      base href="/" es imprescindible: una página 404 puede servirse desde
+      cualquier ruta (/postres/torta, por ejemplo) y sin esto los enlaces
+      y los assets relativos se resolverían mal.
+    -->
+    <base href="/">
+    <meta name="description" content="No encontramos la página que buscabas. Volvé al inicio o mirá nuestros sabores.">
+    <meta name="theme-color" content="#355c59">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_UY">
+    <meta property="og:site_name" content="Heladería Los Trovadores">
+    <meta property="og:title" content="Página no encontrada | Heladería Los Trovadores">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap"
+    >
+    <link rel="stylesheet" href="/assets/styles.css?v=20260820-404">
+    <title>Página no encontrada | Heladería Los Trovadores</title>
+    <script src="/assets/site-config.js" defer></script>
+    <script src="/assets/analytics.js" defer></script>
+    <script src="/assets/components.js?v=20260816-compact-launcher" defer></script>
+    <script src="/assets/main.js" defer></script>
+  </head>
+  <body data-page="404">
+    <site-header></site-header>
+
+    <main id="contenido">
+      <section class="section error-page" aria-labelledby="error-titulo">
+        <div class="container error-page__inner reveal">
+          <span class="eyebrow">Error 404</span>
+          <h1 class="section-title" id="error-titulo">
+            Esta página no está en la vitrina
+          </h1>
+          <p class="lead">
+            Puede que el enlace haya cambiado o que la dirección tenga algún
+            error. Lo que sí sigue en su lugar, desde 1934, es la heladería.
+          </p>
+          <div class="error-page__actions">
+            <a class="button" href="index.html">Volver al inicio</a>
+            <a class="button button--outline" href="productos.html">Ver sabores</a>
+            <a
+              class="button button--whatsapp"
+              data-whatsapp
+              data-whatsapp-text="Hola, quisiera hacer una consulta."
+              href="#"
+              target="_blank"
+              rel="noopener"
+            >Escribinos por WhatsApp</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <site-footer></site-footer>
+  </body>
+</html>

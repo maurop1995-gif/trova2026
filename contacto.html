@@ -7,27 +7,35 @@
       name="description"
       content="Contactá a Heladería Los Trovadores. Consultas, eventos y venta para restaurantes y hoteles en Montevideo."
     >
-    <meta name="theme-color" content="#153a36">
+    <meta name="theme-color" content="#355c59">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_UY">
     <meta property="og:title" content="Contacto | Heladería Los Trovadores">
     <meta
       property="og:description"
-      content="Estamos en Gabriel Pereira 3202, esquina Pedro Berro, Pocitos."
+      content=""
+      data-site-meta-address
     >
     <meta property="og:image" content="https://lostrovadores.com.uy/assets/og.png">
     <meta property="og:image:alt" content="Los Trovadores, heladería artesanal desde 1934">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://lostrovadores.com.uy/contacto.html">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap"
     >
-    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css?v=20260819-body-leading">
     <title>Contacto | Heladería Los Trovadores</title>
-    <script src="assets/components.js" defer></script>
+    <script src="assets/site-config.js" defer></script>
+    <script src="assets/analytics.js" defer></script>
+    <script src="assets/components.js?v=20260816-compact-launcher" defer></script>
     <script src="assets/main.js" defer></script>
   </head>
   <body data-page="contacto">
@@ -36,18 +44,17 @@
     <main id="contenido">
       <header
         class="page-hero"
-        style="--page-image: url('assets/hero-portada.webp')"
+        style="--page-image: url('/assets/hero-portada.webp')"
       >
         <div class="container page-hero__content">
-          <span class="eyebrow">Estamos para ayudarte</span>
           <h1>Contacto</h1>
         </div>
       </header>
 
-      <section class="section" aria-labelledby="contacto-titulo">
-        <div class="container split">
-          <div class="stack reveal">
-            <span class="eyebrow">Escribinos</span>
+      <section class="section contact-form-section" aria-labelledby="contacto-titulo">
+        <div class="container">
+          <div class="contact-intro reveal">
+            <span class="eyebrow">Estamos para ayudarte</span>
             <h2 class="section-title" id="contacto-titulo">
               Hablemos de tu consulta
             </h2>
@@ -55,98 +62,125 @@
               Productos, eventos, venta para restaurantes y hoteles o cualquier
               mensaje que quieras compartir.
             </p>
-            <address class="contact-list">
-              <p>
-                <small>Teléfono</small>
-                <a href="tel:+59827075165">(+598) 2707 51 65</a>
-              </p>
-              <p>
-                <small>Email</small>
-                <a href="mailto:info@lostrovadores.com.uy">
-                  info@lostrovadores.com.uy
-                </a>
-              </p>
-              <p>
-                <small>Dirección</small>
-                <a
-                  href="https://www.google.com/maps/search/?api=1&amp;query=Helader%C3%ADa+Los+Trovadores+Gabriel+Pereira+3202+Montevideo"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Gabriel Pereira 3202, esquina Pedro Berro<br>
-                  Pocitos, Montevideo
-                </a>
-              </p>
-            </address>
           </div>
 
           <form
-            class="form reveal"
+            class="form contact-form reveal"
+            aria-labelledby="formulario-titulo"
             data-whatsapp-form
             data-heading="Consulta desde la web de Los Trovadores"
           >
-            <div class="form-row">
-              <div class="field">
+            <div class="contact-form__header">
+              <div>
+                <span class="eyebrow">Escribinos</span>
+                <h2 id="formulario-titulo">Contanos en qué podemos ayudarte</h2>
+              </div>
+              <p>
+                Completá tus datos y prepararemos el mensaje para que lo envíes
+                por WhatsApp.
+              </p>
+            </div>
+
+            <div class="contact-form__grid">
+              <div class="field contact-form__name">
                 <label for="contacto-nombre">Nombre</label>
                 <input
                   id="contacto-nombre"
                   name="Nombre"
                   autocomplete="name"
+                  placeholder="Tu nombre"
                   required
                 >
               </div>
-              <div class="field">
+
+              <div class="field contact-form__phone">
                 <label for="contacto-telefono">Teléfono</label>
                 <input
                   id="contacto-telefono"
                   name="Teléfono"
                   type="tel"
                   autocomplete="tel"
+                  inputmode="tel"
+                  placeholder="Ej. 098 123 456"
                 >
               </div>
+
+              <div class="field contact-form__email">
+                <label for="contacto-email">Email</label>
+                <input
+                  id="contacto-email"
+                  name="Email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  placeholder="nombre@correo.com"
+                >
+              </div>
+
+              <div class="field contact-form__reason">
+                <label for="contacto-motivo">Motivo</label>
+                <select id="contacto-motivo" name="Motivo" required>
+                  <option value="">Elegí una opción</option>
+                  <option>Consulta general</option>
+                  <option>Evento</option>
+                  <option>Restaurante u hotel</option>
+                  <option>Productos y sabores</option>
+                </select>
+              </div>
+
+              <div class="field contact-form__message">
+                <label for="contacto-mensaje">Mensaje</label>
+                <textarea
+                  id="contacto-mensaje"
+                  name="Mensaje"
+                  placeholder="Contanos brevemente qué necesitás"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="contact-form__actions">
+                <button class="button" type="submit">Enviar por WhatsApp</button>
+                <p class="form-note">
+                  Podrás revisar el mensaje antes de compartirlo.
+                </p>
+                <p class="form-note form-privacy-note">
+                  Usamos tus datos solamente para responder esta consulta.
+                  <a href="privacidad.html">Cómo tratamos tus datos</a>.
+                </p>
+              </div>
             </div>
-            <div class="field">
-              <label for="contacto-email">Email</label>
-              <input
-                id="contacto-email"
-                name="Email"
-                type="email"
-                autocomplete="email"
-              >
-            </div>
-            <div class="field">
-              <label for="contacto-motivo">Motivo</label>
-              <select id="contacto-motivo" name="Motivo" required>
-                <option value="">Seleccionar</option>
-                <option>Consulta general</option>
-                <option>Evento</option>
-                <option>Restaurante u hotel</option>
-                <option>Productos y sabores</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="contacto-mensaje">Mensaje</label>
-              <textarea id="contacto-mensaje" name="Mensaje" required></textarea>
-            </div>
-            <button class="button" type="submit">Enviar por WhatsApp</button>
-            <p class="form-note">
-              Al enviar, se abrirá WhatsApp. Podrás revisar el mensaje antes de
-              compartirlo.
-            </p>
           </form>
         </div>
       </section>
 
-      <section class="section section--forest" aria-labelledby="mapa-titulo">
-        <div class="container">
-          <span class="eyebrow">La esquina más helada de Pocitos</span>
-          <h2 class="section-title section-title--small" id="mapa-titulo">
-            Encontranos
-          </h2>
-          <div class="map-embed spacer-top" data-map-wrapper>
-            <button class="button" type="button" data-load-map>
-              Cargar mapa interactivo
-            </button>
+      <section class="section visit-hours-section" aria-labelledby="visita-titulo">
+        <div class="container visit-section reveal">
+          <div class="visit-section__header">
+            <span class="eyebrow">Vení a visitarnos</span>
+            <h2 class="section-title section-title--small" id="visita-titulo">
+              Horarios
+            </h2>
+          </div>
+          <div class="visit-section__grid">
+            <div class="visit-section__copy">
+              <dl class="hours-list" data-site-hours></dl>
+              <address>
+                <a
+                  class="visit-address"
+                  href="#"
+                  target="_blank"
+                  rel="noopener"
+                  data-site-address-link
+                ></a>
+              </address>
+            </div>
+            <div class="map-embed">
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                data-site-map
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>

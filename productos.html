@@ -7,7 +7,7 @@
       name="description"
       content="Explorá los sabores clásicos, la línea sin azúcar agregada, postres y formatos de Heladería Los Trovadores."
     >
-    <meta name="theme-color" content="#153a36">
+    <meta name="theme-color" content="#355c59">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_UY">
     <meta property="og:title" content="Productos y sabores | Los Trovadores">
@@ -19,31 +19,44 @@
     <meta property="og:image:alt" content="Los Trovadores, heladería artesanal desde 1934">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://lostrovadores.com.uy/productos.html">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap"
     >
-    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css?v=20260819-body-leading">
     <title>Productos y sabores | Heladería Los Trovadores</title>
-    <script src="assets/components.js" defer></script>
-    <script src="assets/products.js" defer></script>
-    <script src="assets/main.js" defer></script>
+    <script src="assets/site-config.js" defer></script>
+    <script src="assets/analytics.js" defer></script>
+    <script src="assets/components.js?v=20260816-compact-launcher" defer></script>
+    <script src="assets/products.js?v=20260816-adu-banner-v2" defer></script>
+    <script src="assets/main.js?v=20260816-adu-banner" defer></script>
   </head>
   <body data-page="productos">
     <site-header></site-header>
 
     <main id="contenido">
+      <header
+        class="page-hero"
+        style="--page-image: url('/assets/card-clasicos.webp')"
+      >
+        <div class="container page-hero__content">
+          <h1 id="sabores-titulo">Sabores y productos</h1>
+        </div>
+      </header>
+
       <section
         class="section product-catalog"
         id="sabores"
         aria-labelledby="sabores-titulo"
       >
         <div class="container product-catalog__inner">
-          <h1 class="catalog-title" id="sabores-titulo">
-            Sabores y productos
-          </h1>
           <div
             class="flavor-controls"
             data-flavor-controls
@@ -127,6 +140,58 @@
             <h2 class="catalog-category-title" data-flavor-title>
               Sabores clásicos
             </h2>
+            <figure
+              class="catalog-category-photo adu-story-banner"
+              data-category-photo
+              hidden
+            >
+              <figcaption class="adu-story-banner__content">
+                <div class="adu-story-banner__copy">
+                  <span class="adu-story-banner__eyebrow">
+                    Pioneros desde hace más de 30 años
+                  </span>
+                  <h3>
+                    Somos la primera heladería de Uruguay en contar con el
+                    <span>Sello de Recomendación de ADU</span>
+                  </h3>
+                  <p>
+                    Desarrollamos nuestra línea junto a nutricionistas para
+                    brindar seguridad y tranquilidad, con el sabor y la calidad
+                    que nos caracterizan.
+                  </p>
+                  <a
+                    class="adu-story-banner__link"
+                    href="https://www.adu.org.uy/index.php/sello-adu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Conocé más sobre el Sello ADU</a>
+                </div>
+              </figcaption>
+              <div class="adu-story-banner__seal-stage">
+                <img
+                  class="adu-story-banner__seal"
+                  src="assets/sello-adu.jpg"
+                  alt="Producto recomendado por ADU, Asociación de Diabéticos del Uruguay"
+                  width="200"
+                  height="300"
+                  loading="eager"
+                  decoding="async"
+                >
+              </div>
+              <div class="adu-story-banner__gallery">
+                <div class="adu-story-banner__feature">
+                  <img
+                    class="adu-story-banner__photo adu-story-banner__photo--collage"
+                    src="assets/banner-adu-productos.jpg"
+                    alt="Composición de helados y postres sin azúcar"
+                    width="1536"
+                    height="1024"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </div>
+              </div>
+            </figure>
             <div
               id="lista-productos"
               class="flavor-grid"
@@ -135,13 +200,124 @@
               aria-labelledby="categoria-clasicos"
               aria-live="polite"
             ></div>
-          </div>
 
-          <p class="form-note spacer-top">
-            Si tenés una alergia, intolerancia o necesidad alimentaria
-            específica, consultá directamente con nuestro equipo antes de
-            consumir.
-          </p>
+            <section
+              class="ceaps-guide"
+              id="guia-ceaps"
+              data-ceaps-guide
+              aria-labelledby="ceaps-titulo"
+              hidden
+            >
+              <div class="ceaps-guide__intro">
+                <span class="ceaps-guide__eyebrow">Información nutricional</span>
+                <h2 class="ceaps-guide__title" id="ceaps-titulo">
+                  Valores nutricionales certificados por el Comité de
+                  Evaluación de Alimentos, Productos y Servicios (CEAPS) de la
+                  Asociación de Diabéticos del Uruguay (ADU)
+                </h2>
+              </div>
+
+              <div class="ceaps-guide__grid">
+                <article class="ceaps-card ceaps-card--table">
+                  <span class="ceaps-card__label">Por porción</span>
+                  <h3>Tabla nutricional por producto</h3>
+                  <div class="ceaps-table-scroll" tabindex="0" role="region" aria-label="Tabla nutricional desplazable">
+                    <table class="ceaps-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Producto</th>
+                          <th scope="col">Porción</th>
+                          <th scope="col">Valor energético</th>
+                          <th scope="col">H de C</th>
+                          <th scope="col">Proteínas</th>
+                          <th scope="col">Grasas totales</th>
+                          <th scope="col">Grasas saturadas</th>
+                          <th scope="col">Grasas trans</th>
+                          <th scope="col">Fibra</th>
+                          <th scope="col">Sodio</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">Sándwich triple</th><td>80 g <small>1 unidad</small></td><td>66 kcal <small>3% VD</small></td><td>11 <small>4% VD</small></td><td>2.8 <small>4% VD</small></td><td>1.2 <small>2% VD</small></td><td>0.3 <small>1% VD</small></td><td>0</td><td>4.9 <small>20% VD</small></td><td>31 <small>1% VD</small></td></tr>
+                        <tr><th scope="row">Barrita de crema</th><td>60 g <small>1 unidad</small></td><td>107 kcal <small>5% VD</small></td><td>6.5 <small>2% VD</small></td><td>1.4 <small>2% VD</small></td><td>8.4 <small>15% VD</small></td><td>6.4 <small>29% VD</small></td><td>0</td><td>2.7 <small>11% VD</small></td><td>17 <small>1% VD</small></td></tr>
+                        <tr><th scope="row">Barrita de crema</th><td>50 g <small>1 unidad</small></td><td>100 kcal <small>5% VD</small></td><td>5.7 <small>2% VD</small></td><td>0.9 <small>1% VD</small></td><td>8.2 <small>15% VD</small></td><td>6.3 <small>29% VD</small></td><td>0</td><td>2.0 <small>8% VD</small></td><td>0</td></tr>
+                        <tr><th scope="row">Helado de chocolate</th><td>60 g <small>1 bocha</small></td><td>36 kcal <small>2% VD</small></td><td>4.4 <small>2% VD</small></td><td>2.1 <small>3% VD</small></td><td>1.1 <small>2% VD</small></td><td>0.4 <small>2% VD</small></td><td>0</td><td>3.3 <small>13% VD</small></td><td>42 <small>2% VD</small></td></tr>
+                        <tr><th scope="row">Helado de crema</th><td>60 g <small>1 bocha</small></td><td>24 kcal <small>1% VD</small></td><td>2.9 <small>1% VD</small></td><td>1 <small>1% VD</small></td><td>0.9 <small>2% VD</small></td><td>0.7 <small>3% VD</small></td><td>0</td><td>3.5 <small>14% VD</small></td><td>15 <small>1% VD</small></td></tr>
+                        <tr><th scope="row">Helado de menta</th><td>60 g <small>1 bocha</small></td><td>23 kcal</td><td>2.5</td><td>0.9</td><td>1.0</td><td>0.9</td><td>0</td><td>3.6</td><td>18</td></tr>
+                        <tr><th scope="row">Helado de frutilla</th><td>60 g <small>1 bocha</small></td><td>17 kcal <small>1% VD</small></td><td>2.2 <small>1% VD</small></td><td>1 <small>1% VD</small></td><td>0.5 <small>1% VD</small></td><td>0</td><td>0</td><td>4.2 <small>17% VD</small></td><td>6 <small>0% VD</small></td></tr>
+                        <tr><th scope="row">Alfajor helado de dulce de leche con baño de chocolate</th><td>80 g <small>1 unidad</small></td><td>170 kcal <small>9% VD</small></td><td>18 <small>6% VD</small></td><td>12 <small>16% VD</small></td><td>5.5 <small>10% VD</small></td><td>2.9 <small>13% VD</small></td><td>0</td><td>5.8 <small>23% VD</small></td><td>83 <small>3% VD</small></td></tr>
+                        <tr><th scope="row">Torta helada</th><td>150 g</td><td>160 kcal <small>8% VD</small></td><td>9.3 <small>2% VD</small></td><td>3.2 <small>1% VD</small></td><td>12.6 <small>6% VD</small></td><td>11.8 <small>5% VD</small></td><td>0</td><td>8.6 <small>33% VD</small></td><td>75 <small>3% VD</small></td></tr>
+                        <tr><th scope="row">Barquillos</th><td>32 g <small>8 unidades</small></td><td>152 kcal <small>8% VD</small></td><td>24 <small>8% VD</small></td><td>4 <small>13% VD</small></td><td>1.7 <small>3% VD</small></td><td>0.5 <small>2% VD</small></td><td>0</td><td>0.4 <small>2% VD</small></td><td>87 <small>4% VD</small></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </article>
+
+                <p class="ceaps-guide__subheading">Informe de resultados · cada 100 gr de producto</p>
+
+                <article class="ceaps-card">
+                  <h3 class="ceaps-flavor-name">Crema sin azúcar</h3>
+                  <dl class="ceaps-facts">
+                    <div><dt>Carbohidratos totales</dt><dd>4.9</dd></div>
+                    <div><dt>Azúcares totales</dt><dd>3.5</dd></div>
+                    <div><dt>Sacarosa</dt><dd>0</dd></div>
+                    <div><dt>Lactosa</dt><dd>3.5</dd></div>
+                    <div><dt>Glucosa</dt><dd>0</dd></div>
+                    <div><dt>Almidón</dt><dd>0</dd></div>
+                    <div><dt>Polialcoholes</dt><dd>1.4</dd></div>
+                    <div><dt>Proteínas</dt><dd>1.7</dd></div>
+                    <div><dt>Grasas totales</dt><dd>1.5</dd></div>
+                    <div><dt>Grasas saturadas</dt><dd>1.1</dd></div>
+                    <div><dt>Fibra alimentaria</dt><dd>5.8</dd></div>
+                    <div><dt>Sodio</dt><dd>25</dd></div>
+                    <div><dt>Polidextrosa</dt><dd>—</dd></div>
+                    <div><dt>Fructuosa</dt><dd>—</dd></div>
+                  </dl>
+                </article>
+
+                <article class="ceaps-card">
+                  <h3 class="ceaps-flavor-name">Frutilla sin azúcar</h3>
+                  <dl class="ceaps-facts">
+                    <div><dt>Carbohidratos totales</dt><dd>3.6</dd></div>
+                    <div><dt>Azúcares totales</dt><dd>3.5</dd></div>
+                    <div><dt>Sacarosa</dt><dd>0</dd></div>
+                    <div><dt>Lactosa</dt><dd>0</dd></div>
+                    <div><dt>Glucosa</dt><dd>0</dd></div>
+                    <div><dt>Almidón</dt><dd>0</dd></div>
+                    <div><dt>Polialcoholes</dt><dd>1.4</dd></div>
+                    <div><dt>Proteínas</dt><dd>1.6</dd></div>
+                    <div><dt>Grasas totales</dt><dd>0.9</dd></div>
+                    <div><dt>Grasas saturadas</dt><dd>0</dd></div>
+                    <div><dt>Fibra alimentaria</dt><dd>7</dd></div>
+                    <div><dt>Sodio</dt><dd>10</dd></div>
+                    <div><dt>Polidextrosa</dt><dd>5.1</dd></div>
+                    <div><dt>Fructuosa</dt><dd>1.5</dd></div>
+                  </dl>
+                </article>
+
+                <article class="ceaps-card">
+                  <h3 class="ceaps-flavor-name">Chocolate sin azúcar</h3>
+                  <dl class="ceaps-facts">
+                    <div><dt>Carbohidratos totales</dt><dd>7.3</dd></div>
+                    <div><dt>Azúcares totales</dt><dd>4.4</dd></div>
+                    <div><dt>Sacarosa</dt><dd>0</dd></div>
+                    <div><dt>Lactosa</dt><dd>2</dd></div>
+                    <div><dt>Glucosa</dt><dd>0</dd></div>
+                    <div><dt>Almidón</dt><dd>2.9</dd></div>
+                    <div><dt>Polialcoholes</dt><dd>1.5</dd></div>
+                    <div><dt>Proteínas</dt><dd>3.5</dd></div>
+                    <div><dt>Grasas totales</dt><dd>1.9</dd></div>
+                    <div><dt>Grasas saturadas</dt><dd>0.7</dd></div>
+                    <div><dt>Fibra alimentaria</dt><dd>5.5</dd></div>
+                    <div><dt>Sodio</dt><dd>70</dd></div>
+                    <div><dt>Polidextrosa</dt><dd>4.5</dd></div>
+                    <div><dt>Fructuosa</dt><dd>0</dd></div>
+                  </dl>
+                </article>
+              </div>
+
+            </section>
+          </div>
         </div>
       </section>
 
@@ -150,20 +326,20 @@
         id="laboratorio"
         aria-labelledby="idea-titulo"
       >
-        <div class="container split">
-          <div class="stack reveal">
+        <div class="container flavor-lab__layout">
+          <div class="stack reveal flavor-lab__intro">
             <span class="eyebrow">Laboratorio de sabores</span>
             <h2 class="section-title" id="idea-titulo">
               Envianos tu sugerencia para crear tu sabor ideal
             </h2>
             <p class="lead">
-              ¿Te imaginás un sabor nuevo? Crealo vos: contanos la combinación
-              que te gustaría probar y tocá «Enviar sugerencia». Nuestro maestro
-              heladero lee todas las ideas, y las mejores llegan a la vidriera.
+              ¿Tenés un sabor en mente? Contanos qué combinación te gustaría
+              probar y enviá tu sugerencia. Nuestro maestro heladero lee cada
+              idea, y las mejores llegan a la vidriera.
             </p>
           </div>
           <form
-            class="form reveal"
+            class="form reveal flavor-lab__form"
             data-email-form
             data-heading="Sugerencia de sabor desde la web"
             data-subject="Nueva sugerencia de sabor — Los Trovadores"
@@ -202,13 +378,35 @@
               <label for="sabor-honey">No completar</label>
               <input id="sabor-honey" name="_honey" tabindex="-1" autocomplete="off">
             </div>
+            <div class="field field--consent form-consent">
+              <input
+                id="sabor-consentimiento"
+                name="Consentimiento"
+                type="checkbox"
+                value="Acepta la política de privacidad"
+                required
+              >
+              <label for="sabor-consentimiento">
+                Acepto que Los Trovadores use mis datos para responder esta
+                sugerencia, según la
+                <a href="privacidad.html">política de privacidad</a>.
+              </label>
+            </div>
             <button class="button button--light" type="submit" data-submit>
               <span class="form-spinner" data-spinner hidden></span>
               <span data-submit-label>Enviar sugerencia</span>
             </button>
             <p class="form-note">
-              Leemos todas las sugerencias. Seguinos en Instagram para enterarte
-              cuál es el próximo sabor que sumamos.
+              Leemos todas las sugerencias. Seguinos en
+              <a
+                class="flavor-lab__instagram"
+                href="https://www.instagram.com/heladerialostrovadores/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+              para enterarte cuál es el próximo sabor que sumamos.
             </p>
             <p class="form-error" data-error role="alert" hidden></p>
           </form>
@@ -219,7 +417,7 @@
                 <path d="M20 6 9 17l-5-5"></path>
               </svg>
             </span>
-            <p class="form-success__title">¡Muchas gracias por tu sugerencia!</p>
+            <p class="form-success__title">Gracias por enviarnos tu sugerencia.</p>
             <p class="form-success__text">
               Ya la recibimos y nuestro maestro heladero la va a leer con
               atención.

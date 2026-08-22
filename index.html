@@ -7,7 +7,7 @@
       name="description"
       content="Heladería artesanal en Pocitos desde 1934. Descubrí los sabores, postres y propuestas para eventos de Los Trovadores."
     >
-    <meta name="theme-color" content="#153a36">
+    <meta name="theme-color" content="#355c59">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_UY">
     <meta property="og:site_name" content="Heladería Los Trovadores">
@@ -20,60 +20,24 @@
     <meta property="og:image:alt" content="Los Trovadores, heladería artesanal desde 1934">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://lostrovadores.com.uy/">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap"
     >
-    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css?v=20260822-resenas-compacta-hero-actions">
     <title>Heladería Los Trovadores | Helado artesanal en Pocitos</title>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": ["IceCreamShop", "LocalBusiness"],
-        "name": "Heladería Los Trovadores",
-        "description": "Heladería artesanal en Pocitos desde 1934.",
-        "url": "https://lostrovadores.com.uy/",
-        "telephone": "+59827075165",
-        "email": "info@lostrovadores.com.uy",
-        "foundingDate": "1934",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Gabriel Pereira 3202, esquina Pedro Berro",
-          "addressLocality": "Montevideo",
-          "addressRegion": "Montevideo",
-          "addressCountry": "UY"
-        },
-        "sameAs": [
-          "https://www.instagram.com/heladerialostrovadores/",
-          "https://www.facebook.com/heladeria.lostrovadores",
-          "https://www.tiktok.com/@heladerialostrovadores"
-        ],
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Sunday"
-            ],
-            "opens": "11:00",
-            "closes": "23:45"
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Friday", "Saturday"],
-            "opens": "11:00",
-            "closes": "00:30"
-          }
-        ]
-      }
-    </script>
-    <script src="assets/components.js" defer></script>
-    <script src="assets/main.js" defer></script>
+    <script id="local-business-data" type="application/ld+json"></script>
+    <script src="assets/site-config.js" defer></script>
+    <script src="assets/analytics.js" defer></script>
+    <script src="assets/components.js?v=20260816-compact-launcher" defer></script>
+    <script src="assets/main.js?v=20260811-ceaps-link" defer></script>
   </head>
   <body data-page="inicio">
     <site-header></site-header>
@@ -81,7 +45,7 @@
     <main id="contenido">
       <section
         class="hero"
-        style="--hero-image: url('assets/hero-portada.webp')"
+        style="--hero-image: url('/assets/hero-portada.webp')"
         aria-labelledby="titulo-principal"
       >
         <div class="container hero__content">
@@ -94,15 +58,8 @@
               Todos los días, en la esquina más helada de Pocitos
             </p>
             <div class="button-row">
-              <a class="button button--light" href="productos.html">Ver sabores</a>
-              <a
-                class="button button--outline"
-                data-whatsapp
-                data-whatsapp-text="Hola, quisiera hacer una consulta."
-                href="https://wa.me/59898388553"
-                target="_blank"
-                rel="noopener"
-              >Consultar por WhatsApp</a>
+              <a class="button hero-action hero-action--primary" href="productos.html">Productos</a>
+              <a class="button hero-action hero-action--secondary" href="eventos.html">Eventos</a>
             </div>
           </div>
           <a
@@ -119,14 +76,20 @@
                 width="30"
                 height="30"
               >
-              <span class="hero__stars" aria-hidden="true">★★★★★</span>
+              <span class="hero__stars" aria-hidden="true">
+                <i>★</i><i>★</i><i>★</i><i>★</i><i>★</i>
+              </span>
             </span>
             <span class="hero__rating">
               <strong class="hero__score" data-google-rating-value>4,8</strong>
               <span>/ 5</span>
             </span>
+            <!--
+              El total sale de la API de Google. Hasta que responda se muestra
+              "Reseñas de Google", sin cifra: nunca un número escrito a mano.
+            -->
             <span class="hero__review-label">
-              <span data-google-review-count>7.607 reseñas</span> de Google
+              <span data-google-review-count>Reseñas</span> de Google
             </span>
           </a>
         </div>
@@ -134,16 +97,23 @@
 
       <section class="section" id="historia">
         <div class="container">
-          <div class="history-intro">
-            <div class="stack reveal">
+          <div class="history-split">
+            <figure class="history-split__media reveal">
+              <img
+                src="assets/historia-local.webp"
+                alt="Local histórico de Los Trovadores en Pocitos"
+                width="1200"
+                height="1201"
+                loading="lazy"
+              >
+            </figure>
+            <div class="history-split__content reveal">
               <span class="eyebrow history-eyebrow">NUESTRA HISTORIA</span>
               <h2 class="section-title">
                 <span data-years-since>92</span> años de helado artesanal,
                 de generación en generación
               </h2>
-            </div>
-            <div class="history-copy reveal">
-              <p class="lead">
+              <p>
                 Desde 1934, Los Trovadores endulza los momentos de miles de
                 familias uruguayas con helado artesanal elaborado con pasión y
                 los mejores ingredientes.
@@ -153,56 +123,15 @@
                 invitación a crear recuerdos. Tradición, calidad y el gusto de
                 compartir, en cada helado.
               </p>
-              <div class="button-row">
-                <a class="button" href="sobre-nosotros.html">Sobre nosotros</a>
-                <a class="button" href="nuestras-redes.html">Nuestras redes</a>
-                <a class="button" href="contacto.html">Contacto</a>
-              </div>
             </div>
-          </div>
-          <div class="history-gallery reveal">
-            <figure class="history-gallery__main">
-              <img
-                src="assets/historia-local.webp"
-                alt="Local histórico de Los Trovadores en Pocitos"
-                width="1200"
-                height="1201"
-                loading="lazy"
-              >
-            </figure>
-            <figure>
-              <img
-                src="assets/historia-helados.webp"
-                alt="Helados artesanales de Los Trovadores"
-                width="1400"
-                height="947"
-                loading="lazy"
-              >
-            </figure>
-            <figure>
-              <img
-                src="assets/historia-taller.webp"
-                alt="Preparación artesanal de helados"
-                width="1400"
-                height="934"
-                loading="lazy"
-              >
-            </figure>
-            <figure class="history-gallery__wide">
-              <img
-                src="assets/history-menu.webp"
-                alt="Detalle de la identidad visual de Los Trovadores"
-                width="2048"
-                height="585"
-                loading="lazy"
-                decoding="async"
-              >
-            </figure>
           </div>
         </div>
       </section>
 
-      <section class="section section--forest" aria-labelledby="productos-titulo">
+      <section
+        class="section section--forest products-home"
+        aria-labelledby="productos-titulo"
+      >
         <div class="container">
           <div class="reveal">
             <span class="eyebrow">Para todos los gustos</span>
@@ -210,8 +139,8 @@
               Explorá nuestros productos y sabores
             </h2>
             <p class="lead">
-              Clásicos de siempre, línea sin azúcar agregada y propuestas para
-              compartir. Consultá disponibilidad y recomendaciones en el local.
+              Descubrí nuestra línea de sabores clásicos, sin azúcar, sin gluten,
+              sin lactosa y postres ideales para compartir en familia y con amigos.
             </p>
           </div>
           <div class="cards">
@@ -247,6 +176,38 @@
                 <span class="product-card__arrow" aria-hidden="true">→</span>
               </div>
             </a>
+            <a class="product-card reveal" href="productos.html#sin-gluten">
+              <img
+                src="assets/card-sin-gluten.webp"
+                alt="Bochas de helado artesanal de chocolate sin gluten"
+                width="1200"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="product-card__body">
+                <span class="tag">Opciones cuidadas</span>
+                <h3>Sin gluten</h3>
+                <p>Chocolate, dulce de leche y frutilla en opciones aptas para celíacos.</p>
+                <span class="product-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+            <a class="product-card reveal" href="productos.html#sin-lactosa">
+              <img
+                src="assets/card-sin-lactosa.webp"
+                alt="Bochas de sorbete artesanal de frutilla y frutos rojos sin lactosa"
+                width="1200"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="product-card__body">
+                <span class="tag">Base frutal</span>
+                <h3>Sin lactosa</h3>
+                <p>Opciones frescas a base de fruta, livianas y llenas de sabor.</p>
+                <span class="product-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
             <a class="product-card reveal" href="productos.html#postres-con-azucar">
               <img
                 src="assets/card-postres.webp"
@@ -258,8 +219,24 @@
               >
               <div class="product-card__body">
                 <span class="tag">Para compartir</span>
-                <h3>Postres artesanales</h3>
+                <h3>Postres con azúcar</h3>
                 <p>Tortas, cassattas y bombones para celebrar cualquier ocasión.</p>
+                <span class="product-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+            <a class="product-card reveal" href="productos.html#postres-sin-azucar">
+              <img
+                src="assets/card-postres-sin-azucar.jpg"
+                alt="Torta helada sin azúcar con frutos rojos y chocolate"
+                width="900"
+                height="600"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="product-card__body">
+                <span class="tag">Dulce alternativa</span>
+                <h3>Postres sin azúcar</h3>
+                <p>Tortas, cassattas y bocados helados para disfrutar sin azúcar.</p>
                 <span class="product-card__arrow" aria-hidden="true">→</span>
               </div>
             </a>
@@ -268,13 +245,84 @@
       </section>
 
       <section
-        class="section section--lime reviews-section"
+        class="section sugarfree-proof"
+        aria-labelledby="sin-azucar-reconocimiento-titulo"
+      >
+        <div class="container sugarfree-proof__layout">
+          <div class="sugarfree-proof__copy reveal">
+            <span class="eyebrow">Helados sin azúcar · Sello ADU</span>
+            <h2
+              class="section-title"
+              id="sin-azucar-reconocimiento-titulo"
+            >
+              Más de 30 años de confianza
+            </h2>
+            <p class="sugarfree-proof__statement">
+              Somos la primera heladería del Uruguay en contar con el Sello de
+              Recomendación de ADU.
+            </p>
+            <p
+              class="sugarfree-proof__statement sugarfree-proof__statement--continuation"
+            >
+              Desarrollamos nuestra línea de sabores y productos sin azúcar junto
+              a nutricionistas para ofrecer la mejor calidad.
+            </p>
+            <div class="button-row sugarfree-proof__actions">
+              <a
+                class="button button--accent sugarfree-proof__link"
+                href="productos.html#sin-azucar"
+                aria-label="Ver los sabores de helado sin azúcar"
+              >Sabores sin azúcar</a>
+              <a
+                class="button button--accent sugarfree-proof__link"
+                href="productos.html#postres-sin-azucar"
+                aria-label="Ver los productos sin azúcar"
+              >Productos sin azúcar</a>
+              <a
+                class="button button--accent sugarfree-proof__link"
+                href="productos.html#guia-ceaps"
+                aria-label="Consultar los valores nutricionales CEAPS"
+              >Valores Nutricionales CEAPS</a>
+            </div>
+          </div>
+
+          <a
+            class="sugarfree-proof__seal-feature reveal"
+            href="https://www.adu.org.uy/index.php/empresas/heladeria-los-trovadores"
+            target="_blank"
+            rel="noopener"
+            aria-label="Ver la ficha de Heladería Los Trovadores en el sitio de la Asociación de Diabéticos del Uruguay (se abre en una pestaña nueva)"
+          >
+            <div class="sugarfree-proof__seal-top" aria-hidden="true">
+              <span>Producto</span>
+              <strong>recomendado</strong>
+              <span>por:</span>
+            </div>
+            <div class="sugarfree-proof__seal-mark" aria-hidden="true">
+              <img
+                src="assets/adu-logo-hd.png"
+                alt=""
+                width="820"
+                height="520"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="sugarfree-proof__seal-footer" aria-hidden="true">
+              <strong>Asociación de Diabéticos<br>del Uruguay</strong>
+              <span>Montevideo - Uruguay</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section
+        class="section section--cream reviews-section"
         aria-labelledby="resenas-titulo"
       >
         <div class="container">
           <div class="reviews-head reveal">
             <div>
-              <span class="eyebrow">La voz de quienes nos visitan</span>
               <h2 class="section-title" id="resenas-titulo">
                 Lo que dicen nuestros clientes
               </h2>
@@ -282,7 +330,7 @@
           </div>
           <div class="reviews-summary-row reveal">
             <a
-              class="review-summary"
+              class="review-summary review-summary--classic"
               href="https://share.google/g5HVUBpzcsd5Ws56V"
               target="_blank"
               rel="noopener"
@@ -303,7 +351,7 @@
                 <strong data-google-rating>4,8 / 5</strong>
                 <small>
                   Ver las
-                  <span data-google-review-count>7.607 reseñas</span>
+                  <span data-google-review-count>reseñas</span>
                   en Google
                 </small>
               </span>
@@ -315,7 +363,7 @@
             role="status"
             aria-live="polite"
           >
-            El puntaje y el total de reseñas se sincronizan con Google.
+            Las reseñas, el puntaje y el total se sincronizan diariamente con Google.
           </p>
           <div
             class="review-marquee"
@@ -438,53 +486,6 @@
                   </div>
                 </div>
               </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section visit-hours-section" aria-labelledby="visita-titulo">
-        <div class="container visit-section reveal">
-          <div class="visit-section__header">
-            <span class="eyebrow">Vení a visitarnos</span>
-            <h2 class="section-title section-title--small" id="visita-titulo">
-              Horarios
-            </h2>
-          </div>
-          <div class="visit-section__grid">
-            <div class="visit-section__copy">
-              <dl class="hours-list">
-                <div>
-                  <dt>Lunes - Domingo</dt>
-                  <dd>11:00 - 23:45</dd>
-                </div>
-                <div>
-                  <dt>Viernes y Sábado</dt>
-                  <dd>Hasta las 00:30</dd>
-                </div>
-              </dl>
-              <address>
-                <a
-                  class="visit-address"
-                  href="https://www.google.com/maps/search/?api=1&amp;query=Helader%C3%ADa+Los+Trovadores+Gabriel+Pereira+3202+Montevideo"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <span class="visit-address__pin" aria-hidden="true"></span>
-                  <span>
-                    Gabriel Pereira 3202,
-                    <span class="address-nowrap">esq. Pedro Berro</span>
-                  </span>
-                </a>
-              </address>
-            </div>
-            <div class="map-embed">
-              <iframe
-                src="https://maps.google.com/maps?q=Gabriel%20Pereira%203202%20Montevideo&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                title="Mapa de Heladería Los Trovadores"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
             </div>
           </div>
         </div>

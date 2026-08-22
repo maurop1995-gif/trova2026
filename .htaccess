@@ -39,3 +39,7 @@
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
+
+# Pagina de error propia. En Cloudflare Pages el archivo /404.html se usa
+# automaticamente; esto es para el hosting Apache de cPanel.
+ErrorDocument 404 /404.html
