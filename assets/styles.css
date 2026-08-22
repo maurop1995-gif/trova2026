@@ -5978,8 +5978,46 @@ trovito-chat[data-open="true"] {
   }
 
   .sugarfree-proof__link {
-    min-height: 3.6rem;
-    padding-inline: 1.6rem;
+    min-height: 5rem;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.8rem 1.25rem;
+    border: 2px solid var(--white);
+    border-radius: var(--radius-pill);
+    font-size: var(--type-2);
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    box-shadow: none;
+  }
+
+  .sugarfree-proof__link span {
+    display: block;
+  }
+
+  .sugarfree-proof__link--primary {
+    color: var(--white);
+    background: var(--brand-dark);
+    box-shadow: 0 10px 24px rgb(var(--brand-dark-rgb) / 28%);
+  }
+
+  .sugarfree-proof__link--primary:hover {
+    color: var(--white);
+    background: transparent;
+    border-color: var(--white);
+    box-shadow: none;
+  }
+
+  .sugarfree-proof__link--secondary {
+    color: var(--white);
+    background: transparent;
+    border-color: rgb(var(--white-rgb) / 86%);
+  }
+
+  .sugarfree-proof__link--secondary:hover {
+    color: var(--white);
+    background: var(--brand-dark);
+    border-color: var(--brand-dark);
+    box-shadow: 0 10px 24px rgb(var(--brand-dark-rgb) / 28%);
   }
 
   .sugarfree-proof__actions {
@@ -5991,7 +6029,6 @@ trovito-chat[data-open="true"] {
 
   .sugarfree-proof__actions .button {
     width: 100%;
-    padding-inline: 1rem;
     text-align: center;
   }
 
